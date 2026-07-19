@@ -4,11 +4,11 @@ import db from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
-export default function InitiativesPage() {
-  const featured = db
+export default async function InitiativesPage() {
+  const featured = await db
     .prepare("SELECT * FROM initiatives WHERE featured = 1 ORDER BY sort_order ASC")
     .all();
-  const others = db
+  const others = await db
     .prepare("SELECT * FROM initiatives WHERE featured = 0 ORDER BY sort_order ASC")
     .all();
 

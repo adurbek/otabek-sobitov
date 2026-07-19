@@ -28,7 +28,7 @@ export async function POST(request) {
     return NextResponse.json({ error: "Login va parol talab qilinadi" }, { status: 400 });
   }
 
-  const user = db.prepare("SELECT * FROM users WHERE username = ?").get(username);
+  const user = await db.prepare("SELECT * FROM users WHERE username = ?").get(username);
   const passwordMatches = user ? bcrypt.compareSync(password, user.password_hash) : false;
 
   if (!user || !passwordMatches) {

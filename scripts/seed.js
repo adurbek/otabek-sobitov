@@ -1,9 +1,10 @@
 // Run with: npm run seed
 // Reads ADMIN_USERNAME / ADMIN_PASSWORD from .env.local and creates/updates the admin user.
+// TURSO_DATABASE_URL berilgan bo'lsa bulutdagi bazaga, aks holda lokal faylga yozadi.
 const path = require("path");
 const fs = require("fs");
 const bcrypt = require("bcryptjs");
-const Database = require("better-sqlite3");
+const { createClient } = require("@libsql/client");
 
 // Minimal .env.local loader (avoids adding a dotenv dependency).
 function loadEnvLocal() {
@@ -38,29 +39,56 @@ if (password.length < 8) {
   process.exit(1);
 }
 
-const dbPath = process.env.DATABASE_PATH || "./data/sobitov.db";
-const resolvedPath = path.isAbsolute(dbPath) ? dbPath : path.join(process.cwd(), dbPath);
-fs.mkdirSync(path.dirname(resolvedPath), { recursive: true });
-
-const db = new Database(resolvedPath);
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,
-    created_at TEXT DEFAULT CURRENT_TIMESTAMP
-  );
-`);
-
-const passwordHash = bcrypt.hashSync(password, 12);
-
-const existing = db.prepare("SELECT id FROM users WHERE username = ?").get(username);
-if (existing) {
-  db.prepare("UPDATE users SET password_hash = ? WHERE username = ?").run(passwordHash, username);
-  console.log(`Admin foydalanuvchi "${username}" paroli yangilandi.`);
-} else {
-  db.prepare("INSERT INTO users (username, password_hash) VALUES (?, ?)").run(username, passwordHash);
-  console.log(`Admin foydalanuvchi "${username}" yaratildi.`);
+function makeClient() {
+  if (process.env.TURSO_DATABASE_URL) {
+    console.log("Turso (bulut) bazasiga ulanmoqda...");
+    return createClient({
+      url: process.env.TURSO_DATABASE_URL,
+      authToken: process.env.TURSO_AUTH_TOKEN,
+    });
+  }
+  const dbPath = process.env.DATABASE_PATH || "./data/sobitov.db";
+  const resolved = path.isAbsolute(dbPath) ? dbPath : path.join(process.cwd(), dbPath);
+  fs.mkdirSync(path.dirname(resolved), { recursive: true });
+  return createClient({ url: "file:" + resolved.replace(/\\/g, "/") });
 }
 
-db.close();
+async function main() {
+  const db = makeClient();
+
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      username TEXT UNIQUE NOT NULL,
+      password_hash TEXT NOT NULL,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  const passwordHash = bcrypt.hashSync(password, 12);
+
+  const existing = await db.execute({
+    sql: "SELECT id FROM users WHERE username = ?",
+    args: [username],
+  });
+  if (existing.rows.length) {
+    await db.execute({
+      sql: "UPDATE users SET password_hash = ? WHERE username = ?",
+      args: [passwordHash, username],
+    });
+    console.log(`Admin foydalanuvchi "${username}" paroli yangilandi.`);
+  } else {
+    await db.execute({
+      sql: "INSERT INTO users (username, password_hash) VALUES (?, ?)",
+      args: [username, passwordHash],
+    });
+    console.log(`Admin foydalanuvchi "${username}" yaratildi.`);
+  }
+
+  db.close();
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

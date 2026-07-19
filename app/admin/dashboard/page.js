@@ -3,11 +3,11 @@ import db from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
-export default function DashboardPage() {
-  const newsCount = db.prepare("SELECT COUNT(*) AS c FROM news").get().c;
-  const initiativesCount = db.prepare("SELECT COUNT(*) AS c FROM initiatives").get().c;
-  const travelsCount = db.prepare("SELECT COUNT(*) AS c FROM travels").get().c;
-  const awardsCount = db.prepare("SELECT COUNT(*) AS c FROM awards").get().c;
+export default async function DashboardPage() {
+  const newsCount = (await db.prepare("SELECT COUNT(*) AS c FROM news").get()).c;
+  const initiativesCount = (await db.prepare("SELECT COUNT(*) AS c FROM initiatives").get()).c;
+  const travelsCount = (await db.prepare("SELECT COUNT(*) AS c FROM travels").get()).c;
+  const awardsCount = (await db.prepare("SELECT COUNT(*) AS c FROM awards").get()).c;
 
   const cards = [
     { label: "Voqealar", count: newsCount, href: "/admin/news" },

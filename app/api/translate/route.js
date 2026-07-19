@@ -59,7 +59,7 @@ export async function POST(request) {
     "SELECT translated FROM translations WHERE lang = ? AND source = ?"
   );
   for (const s of unique) {
-    const row = getCached.get(lang, s);
+    const row = await getCached.get(lang, s);
     if (row) translations[s] = row.translated;
     else missing.push(s);
   }
@@ -73,7 +73,7 @@ export async function POST(request) {
         const tr = await googleTranslate(s, lang);
         if (tr && tr.trim()) {
           translations[s] = tr;
-          save.run(lang, s, tr);
+          await save.run(lang, s, tr);
         }
       } catch {}
     }

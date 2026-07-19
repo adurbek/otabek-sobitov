@@ -4,7 +4,7 @@ import db from "@/lib/db";
 export const runtime = "nodejs";
 
 export async function GET() {
-  const items = db
+  const items = await db
     .prepare("SELECT * FROM slides ORDER BY sort_order ASC, id DESC")
     .all();
   return NextResponse.json(items);
@@ -19,12 +19,12 @@ export async function POST(request) {
       { status: 400 }
     );
   }
-  const result = db
+  const result = await db
     .prepare(
       "INSERT INTO slides (title, date, image_url, sort_order) VALUES (?, ?, ?, ?)"
     )
     .run(title, date, image_url, sort_order);
-  const created = db
+  const created = await db
     .prepare("SELECT * FROM slides WHERE id = ?")
     .get(result.lastInsertRowid);
   return NextResponse.json(created, { status: 201 });

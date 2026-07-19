@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { put } from "@vercel/blob";
 
 export const runtime = "nodejs";
 
@@ -35,6 +36,16 @@ export async function POST(request) {
   }
 
   const name = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+
+  // Vercel'da fayl tizimiga yozib bo'lmaydi — rasmlar Vercel Blob'da saqlanadi.
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    const blob = await put(`uploads/${name}`, bytes, {
+      access: "public",
+      contentType: file.type,
+    });
+    return NextResponse.json({ url: blob.url }, { status: 201 });
+  }
+
   const dir = path.join(process.cwd(), "public", "uploads");
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, name), bytes);

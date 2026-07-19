@@ -1,12 +1,12 @@
-# SOBITOV — Next.js sayt + Admin panel
+# OTABEK SOBITOV — Next.js sayt + Admin panel
 
-Bu loyiha Next.js (App Router) asosida qurilgan, kontenti SQLite bazasida saqlanadigan va xavfsiz admin panelga ega shaxsiy sayt.
+Bu loyiha Next.js (App Router) asosida qurilgan, kontenti SQLite (lokal fayl yoki Turso bulut bazasi) da saqlanadigan va xavfsiz admin panelga ega shaxsiy sayt.
 
 ## Tuzilma
 
 - **Ochiq sahifalar:** Bosh sahifa, Men haqimda, Voqealar, Tashabbuslar, Safarlar — barchasi SQLite bazasidan real vaqtda o‘qiydi.
 - **Admin panel** (`/admin`): login qilib, barcha kontentni (matn, yangiliklar, tashabbuslar, safarlar, mukofotlar) qo‘shish/tahrirlash/o‘chirish mumkin.
-- **Baza:** SQLite, `better-sqlite3` orqali, fayl sifatida `data/sobitov.db` da saqlanadi.
+- **Baza:** SQLite, `@libsql/client` orqali. Lokal rejimda `data/sobitov.db` fayli, productionda (masalan Vercel) — Turso bulut bazasi (`TURSO_DATABASE_URL` berilganda).
 - **Xavfsizlik:**
   - Admin paroli bazada faqat **bcrypt hash** ko‘rinishida saqlanadi (ochiq matnda emas).
   - Kirishdan so‘ng **JWT sessiya tokeni** beriladi va faqat serverga ko‘rinadigan, JavaScript orqali o‘qib bo‘lmaydigan **httpOnly cookie**da saqlanadi (8 soat amal qiladi).
@@ -49,16 +49,19 @@ npm run build
 npm run start
 ```
 
-## Muhim: joylashtirish (deploy) haqida
+## Vercel'da joylashtirish (Turso bilan)
 
-`better-sqlite3` fayl asosida ishlaydigan baza bo‘lgani uchun, **doimiy fayl tizimiga ega** muhitda ishlashi kerak:
+Vercel serverless bo‘lgani uchun lokal SQLite fayli ishlamaydi — baza [Turso](https://turso.tech) bulutida saqlanadi:
 
-- ✅ **Mos keladi:** oddiy VPS (masalan DigitalOcean, Hetzner), Railway, Render, yoki Docker konteyner — bu yerlarda `data/sobitov.db` fayli doim saqlanib qoladi.
-- ❌ **Mos kelmaydi:** Vercel kabi "serverless" platformalar — ularda fayl tizimi vaqtinchalik bo‘lib, har bir so‘rovda ma’lumotlar yo‘qolib ketishi mumkin.
+1. turso.tech da bepul akkaunt oching, yangi database yarating.
+2. Database URL (`libsql://...`) va auth token oling.
+3. Lokal `.env.local` ga `TURSO_DATABASE_URL` va `TURSO_AUTH_TOKEN` ni yozing.
+4. Lokal kontentni bulutga ko‘chiring: `npm run migrate` (admin foydalanuvchi ham ko‘chadi).
+5. Vercel loyihasining **Settings → Environment Variables** bo‘limiga qo‘shing: `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, `JWT_SECRET`.
+6. Rasm yuklash ishlashi uchun Vercel'da **Storage → Blob** store yarating (`BLOB_READ_WRITE_TOKEN` avtomatik ulanadi).
+7. Redeploy qiling.
 
-VPS'da ishga tushirishda `pm2` yoki shunga o‘xshash process manager ishlatishni tavsiya qilaman (`pm2 start npm --name sobitov -- start`).
-
-`data/sobitov.db` faylini muntazam zaxira (backup) qilib turing — bu yerda saytning butun kontenti saqlanadi.
+VPS'da esa hech qanday Turso kerak emas — `TURSO_DATABASE_URL` ni bo‘sh qoldirsangiz lokal `data/sobitov.db` fayli ishlatiladi. `pm2` bilan ishga tushirish tavsiya etiladi (`pm2 start npm --name sobitov -- start`) va baza faylini muntazam zaxiralang.
 
 ## Kontentni tahrirlash
 

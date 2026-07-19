@@ -5,9 +5,9 @@ import db from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
-export default function TravelsPage() {
-  const travels = db.prepare("SELECT * FROM travels ORDER BY sort_order ASC, id DESC").all();
-  const mapVisits = db.prepare("SELECT scope, code, visits FROM map_visits").all();
+export default async function TravelsPage() {
+  const travels = await db.prepare("SELECT * FROM travels ORDER BY sort_order ASC, id DESC").all();
+  const mapVisits = await db.prepare("SELECT scope, code, visits FROM map_visits").all();
 
   return (
     <>

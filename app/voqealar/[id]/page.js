@@ -6,11 +6,11 @@ import db from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
-export default function NewsDetailPage({ params }) {
+export default async function NewsDetailPage({ params }) {
   const id = Number(params.id);
   if (!Number.isInteger(id)) notFound();
 
-  const item = db.prepare("SELECT * FROM news WHERE id = ?").get(id);
+  const item = await db.prepare("SELECT * FROM news WHERE id = ?").get(id);
   if (!item) notFound();
 
   const paragraphs = String(item.body || "")

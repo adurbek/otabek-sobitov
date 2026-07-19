@@ -5,8 +5,8 @@ import db from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
-export default function NewsPage() {
-  const news = db.prepare("SELECT * FROM news ORDER BY sort_order ASC, date DESC, id DESC").all();
+export default async function NewsPage() {
+  const news = await db.prepare("SELECT * FROM news ORDER BY sort_order ASC, date DESC, id DESC").all();
 
   return (
     <>

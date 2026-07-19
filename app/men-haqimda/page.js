@@ -5,9 +5,9 @@ import db from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
-export default function AboutPage() {
-  const about = db.prepare("SELECT * FROM about WHERE id = 1").get();
-  const awards = db.prepare("SELECT * FROM awards ORDER BY sort_order ASC, year DESC").all();
+export default async function AboutPage() {
+  const about = await db.prepare("SELECT * FROM about WHERE id = 1").get();
+  const awards = await db.prepare("SELECT * FROM awards ORDER BY sort_order ASC, year DESC").all();
 
   return (
     <>

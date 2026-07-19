@@ -10,29 +10,29 @@ import db from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
-export default function HomePage() {
-  const adminSlides = db
+export default async function HomePage() {
+  const adminSlides = await db
     .prepare(
       "SELECT id, title, date, image_url FROM slides ORDER BY sort_order ASC, id DESC LIMIT 8"
     )
     .all();
-  const newsSlides = db
+  const newsSlides = await db
     .prepare(
       "SELECT id, title, date, image_url FROM news WHERE image_url IS NOT NULL AND image_url != '' ORDER BY sort_order ASC, date DESC, id DESC LIMIT 5"
     )
     .all();
   const slides = adminSlides.length ? adminSlides : newsSlides;
-  const latestNews = db
+  const latestNews = await db
     .prepare(
       "SELECT id, title, date, image_url FROM news ORDER BY sort_order ASC, date DESC, id DESC LIMIT 6"
     )
     .all();
-  const videos = db
+  const videos = await db
     .prepare(
       "SELECT id, title, date, youtube_url FROM videos ORDER BY sort_order ASC, date DESC, id DESC LIMIT 5"
     )
     .all();
-  const mapVisits = db
+  const mapVisits = await db
     .prepare("SELECT scope, code, visits FROM map_visits")
     .all();
 

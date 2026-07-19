@@ -4,7 +4,7 @@ import db from "@/lib/db";
 export const runtime = "nodejs";
 
 export async function GET() {
-  const about = db.prepare("SELECT * FROM about WHERE id = 1").get();
+  const about = await db.prepare("SELECT * FROM about WHERE id = 1").get();
   return NextResponse.json(about);
 }
 
@@ -25,7 +25,7 @@ export async function PUT(request) {
     link_url = "",
   } = body || {};
 
-  db.prepare(
+  await db.prepare(
     `UPDATE about SET full_name=?, direction=?, position=?, education=?, location=?, summary=?, principles=?, bio_education=?, bio_career=?, bio_social=?, photo_url=?, link_url=? WHERE id=1`
   ).run(
     full_name,
@@ -42,6 +42,6 @@ export async function PUT(request) {
     link_url
   );
 
-  const updated = db.prepare("SELECT * FROM about WHERE id = 1").get();
+  const updated = await db.prepare("SELECT * FROM about WHERE id = 1").get();
   return NextResponse.json(updated);
 }

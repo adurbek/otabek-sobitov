@@ -65,7 +65,7 @@ function stems(token) {
 // Ruscha/inglizcha so'rovlarni o'zbekchaga o'girish (natija keshlanadi).
 async function queryToUzbek(q) {
   const key = q.toLowerCase().slice(0, 200);
-  const cached = db
+  const cached = await db
     .prepare("SELECT translated FROM translations WHERE lang = 'q>uz' AND source = ?")
     .get(key);
   if (cached) return cached.translated;
@@ -81,7 +81,7 @@ async function queryToUzbek(q) {
     const data = await res.json();
     const tr = (data?.[0] || []).map((seg) => seg?.[0] || "").join("");
     if (tr && tr.trim()) {
-      db.prepare(
+      await db.prepare(
         "INSERT OR REPLACE INTO translations (lang, source, translated) VALUES ('q>uz', ?, ?)"
       ).run(key, tr);
       return tr;
@@ -103,6 +103,19 @@ export async function GET(request) {
     const hay = norm(fields.join(" "));
     return tokens.every((t) => stems(t).some((st) => hay.includes(st)));
   };
+
+  // Barcha jadvallarni bir marta o'qib olamiz — collect() shu massivlar ustida ishlaydi.
+  const [newsRows, slideRows, mapRows, initiativeRows, travelRows, videoRows, awardRows, about] =
+    await Promise.all([
+      db.prepare("SELECT id, tag, title, body, date FROM news").all(),
+      db.prepare("SELECT id, title, date FROM slides").all(),
+      db.prepare("SELECT scope, name, visits FROM map_visits").all(),
+      db.prepare("SELECT id, title, description FROM initiatives").all(),
+      db.prepare("SELECT id, city, country, date_label, event, description FROM travels").all(),
+      db.prepare("SELECT id, title, date FROM videos").all(),
+      db.prepare("SELECT id, year, title, description FROM awards").all(),
+      db.prepare("SELECT * FROM about WHERE id = 1").get(),
+    ]);
 
   let results = collect();
 
@@ -142,7 +155,7 @@ export async function GET(request) {
     }
   }
 
-  for (const n of db.prepare("SELECT id, tag, title, body, date FROM news").all()) {
+  for (const n of newsRows) {
     if (matches(n.tag, n.title, n.body)) {
       results.push({
         type: "Voqea",
@@ -153,7 +166,7 @@ export async function GET(request) {
     }
   }
 
-  for (const s of db.prepare("SELECT id, title, date FROM slides").all()) {
+  for (const s of slideRows) {
     if (matches(s.title)) {
       results.push({
         type: "Bosh sahifa",
@@ -164,7 +177,7 @@ export async function GET(request) {
     }
   }
 
-  for (const m of db.prepare("SELECT scope, name, visits FROM map_visits").all()) {
+  for (const m of mapRows) {
     if (matches(m.name)) {
       results.push({
         type: "Tashrif",
@@ -175,7 +188,7 @@ export async function GET(request) {
     }
   }
 
-  for (const i of db.prepare("SELECT id, title, description FROM initiatives").all()) {
+  for (const i of initiativeRows) {
     if (matches(i.title, i.description)) {
       results.push({
         type: "Tashabbus",
@@ -186,7 +199,7 @@ export async function GET(request) {
     }
   }
 
-  for (const t of db.prepare("SELECT id, city, country, date_label, event, description FROM travels").all()) {
+  for (const t of travelRows) {
     if (matches(t.city, t.country, t.event, t.description)) {
       results.push({
         type: "Safar",
@@ -197,7 +210,7 @@ export async function GET(request) {
     }
   }
 
-  for (const v of db.prepare("SELECT id, title, date FROM videos").all()) {
+  for (const v of videoRows) {
     if (matches(v.title)) {
       results.push({
         type: "Video",
@@ -208,7 +221,7 @@ export async function GET(request) {
     }
   }
 
-  for (const a of db.prepare("SELECT id, year, title, description FROM awards").all()) {
+  for (const a of awardRows) {
     if (matches(a.title, a.description, a.year)) {
       results.push({
         type: "Mukofot",
@@ -219,7 +232,6 @@ export async function GET(request) {
     }
   }
 
-  const about = db.prepare("SELECT * FROM about WHERE id = 1").get();
   if (
     about &&
     matches(
