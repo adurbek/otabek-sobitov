@@ -32,6 +32,7 @@ function FeedColumn({ network, profile, posts }) {
   // Facebook Sahifasi (Page) havolasi kiritilgan bo'lsa, rasmiy plagin orqali
   // jonli lenta ko'rsatiladi (shaxsiy profillar uchun Facebook buni bermaydi).
   const pageUrl = network.key === "facebook" ? profile?.page_url : "";
+  const name = profile?.display_name || "Otabek Sobitov";
   if (pageUrl) {
     return (
       <div className="feed-col">
@@ -55,19 +56,31 @@ function FeedColumn({ network, profile, posts }) {
   return (
     <div className="feed-col">
       <h3 className="feed-title">{network.title}</h3>
-      <div className="feed-embed">
-        <div className={`feed-head brand-${network.key}`}>
+      <div className={`feed-embed brand-${network.key}`}>
+        {/* Sarlavha: rasmiy plagin uslubida — avatar, ism, tasdiq belgisi, kuzatish tugmasi */}
+        <div className="feed-head">
           {profile?.avatar_url ? (
-            <img className="feed-avatar" src={profile.avatar_url} alt={profile.display_name} />
+            <img className="feed-avatar" src={profile.avatar_url} alt={name} />
           ) : (
             <span className="feed-avatar feed-avatar-fallback">{ICONS[network.key]}</span>
           )}
           <span className="feed-head-text">
-            <b>{profile?.display_name || "Otabek Sobitov"}</b>
-            {profile?.handle && <span className="feed-handle">{profile.handle}</span>}
+            <span className="feed-head-name">
+              <span className="feed-head-label">{name}</span>
+              <span className="feed-verified" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.2 14.1 4l2.7-.3 1 2.5 2.5 1-.3 2.7 1.8 2.1-1.8 2.1.3 2.7-2.5 1-1 2.5-2.7-.3L12 21.8 9.9 20l-2.7.3-1-2.5-2.5-1 .3-2.7L2.2 12 4 9.9l-.3-2.7 2.5-1 1-2.5 2.7.3L12 2.2Zm-1.2 12.9 5-5-1.4-1.4-3.6 3.6-1.6-1.6-1.4 1.4 3 3Z" />
+                </svg>
+              </span>
+            </span>
             {profile?.followers && <span className="feed-count">{profile.followers}</span>}
           </span>
-          <span className="feed-head-icon">{ICONS[network.key]}</span>
+          {url && (
+            <a className="feed-follow" href={url} target="_blank" rel="noopener noreferrer">
+              <span className="feed-follow-icon">{ICONS[network.key]}</span>
+              Kuzatish
+            </a>
+          )}
         </div>
 
         <div className="feed-scroll">
@@ -80,9 +93,22 @@ function FeedColumn({ network, profile, posts }) {
           {posts.map((p) => {
             const inner = (
               <>
-                {p.image_url && <img src={p.image_url} alt="" />}
+                <span className="feed-post-head">
+                  {profile?.avatar_url ? (
+                    <img className="feed-post-avatar" src={profile.avatar_url} alt="" />
+                  ) : (
+                    <span className="feed-post-avatar feed-avatar-fallback">
+                      {ICONS[network.key]}
+                    </span>
+                  )}
+                  <span className="feed-post-meta">
+                    <b>{name}</b>
+                    {p.date && <span>{p.date}</span>}
+                  </span>
+                  <span className="feed-post-brand">{ICONS[network.key]}</span>
+                </span>
                 {p.body && <p>{p.body}</p>}
-                {p.date && <span className="feed-post-date">{p.date}</span>}
+                {p.image_url && <img className="feed-post-img" src={p.image_url} alt="" />}
               </>
             );
             return p.link_url ? (
