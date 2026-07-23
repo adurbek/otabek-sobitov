@@ -2,9 +2,9 @@
 // Bo'sh qoldirilsa, lenta o'rniga havolali karta ko'rsatiladi.
 const ACCOUNTS = {
   instagram: "otabek.yuldashevich.sobitov", // instagram.com/<nom>
-  facebook: "", // facebook.com/<sahifa nomi>
-  x: "", // x.com/<nom>
-  linkedin: "", // LinkedIn profil havolasi to'liq yoziladi
+  facebook: "https://facebook.com/otabek.sobitov.9",
+  telegram: "https://t.me/otabek_yuldashovich",
+  linkedin: "https://www.linkedin.com/in/otabek-sobitov-136192369/",
 };
 
 const ICONS = {
@@ -20,9 +20,9 @@ const ICONS = {
       <path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.54-1.5h1.66V3.6c-.29-.04-1.27-.12-2.42-.12-2.4 0-4.03 1.46-4.03 4.15v2.27H7.5V13h2.75v8h3.25Z" />
     </svg>
   ),
-  x: (
+  telegram: (
     <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M17.5 3h3l-6.6 7.6L21.7 21h-6.1l-4.8-6.3L5.3 21h-3l7-8.1L2.5 3h6.2l4.3 5.7L17.5 3Zm-1.1 16.2h1.7L7.8 4.7H6L16.4 19.2Z" />
+      <path d="M9.04 15.31 8.9 19.2c.4 0 .57-.17.78-.37l1.87-1.79 3.88 2.84c.71.39 1.22.19 1.41-.66l2.56-12.02c.23-1.05-.38-1.46-1.07-1.2L3.62 11.8c-1.03.4-1.02.97-.18 1.23l3.86 1.2 8.95-5.65c.42-.26.8-.12.49.14l-7.7 6.59Z" />
     </svg>
   ),
   linkedin: (
@@ -49,7 +49,7 @@ function FeedCard({ brand, title, text, href, linkLabel }) {
 export default function SocialFeeds() {
   const ig = ACCOUNTS.instagram;
   const fb = ACCOUNTS.facebook;
-  const x = ACCOUNTS.x;
+  const tg = ACCOUNTS.telegram;
   const li = ACCOUNTS.linkedin;
 
   return (
@@ -88,65 +88,22 @@ export default function SocialFeeds() {
 
         <div className="feed-col">
           <h3 className="feed-title">Facebook</h3>
-          {fb ? (
-            <div className="feed-frame">
-              <iframe
-                src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
-                  `https://www.facebook.com/${fb}`
-                )}&tabs=timeline&width=360&height=540&small_header=true&adapt_container_width=true&hide_cover=false`}
-                title="Facebook sahifasi"
-                loading="lazy"
-                allow="encrypted-media"
-              />
-            </div>
-          ) : (
-            <FeedCard
-              brand="facebook"
-              text="Facebook sahifasidagi postlar, e'lonlar va yangiliklar bilan shu yerdan tanishishingiz mumkin."
-              href="https://www.facebook.com/"
-              linkLabel="Facebook sahifasini ochish ↗"
-            />
-          )}
-          {fb && (
-            <a
-              className="feed-link"
-              href={`https://www.facebook.com/${fb}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Facebook sahifasini ochish ↗
-            </a>
-          )}
+          <FeedCard
+            brand="facebook"
+            text="Facebook sahifasidagi postlar, e'lonlar va yangiliklar bilan shu yerdan tanishishingiz mumkin."
+            href={fb}
+            linkLabel="Facebook sahifasini ochish ↗"
+          />
         </div>
 
         <div className="feed-col">
-          <h3 className="feed-title">X (Twitter)</h3>
-          {x ? (
-            <div className="feed-frame">
-              <iframe
-                src={`https://syndication.twitter.com/srv/timeline-profile/screen-name/${x}`}
-                title="X sahifasi"
-                loading="lazy"
-              />
-            </div>
-          ) : (
-            <FeedCard
-              brand="x"
-              text="X (Twitter) sahifasidagi fikrlar va postlar bilan shu yerdan tanishishingiz mumkin."
-              href="https://x.com/"
-              linkLabel="X sahifasini ochish ↗"
-            />
-          )}
-          {x && (
-            <a
-              className="feed-link"
-              href={`https://x.com/${x}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              X sahifasini ochish ↗
-            </a>
-          )}
+          <h3 className="feed-title">Telegram</h3>
+          <FeedCard
+            brand="telegram"
+            text="Telegram sahifasidagi e'lonlar va yangiliklar bilan shu yerdan tanishishingiz mumkin."
+            href={tg}
+            linkLabel="Telegram sahifasini ochish ↗"
+          />
         </div>
 
         <div className="feed-col">
@@ -154,7 +111,7 @@ export default function SocialFeeds() {
           <FeedCard
             brand="linkedin"
             text="LinkedIn sahifasidagi postlar, video va rasmlar bilan shu yerdan tanishishingiz mumkin."
-            href={li || "https://www.linkedin.com/"}
+            href={li}
             linkLabel="LinkedIn profilini ochish ↗"
           />
         </div>

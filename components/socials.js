@@ -1,7 +1,7 @@
 export const SOCIALS = [
   {
     label: "Telegram",
-    href: "https://t.me/",
+    href: "https://t.me/otabek_yuldashovich",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor">
         <path d="M9.04 15.31 8.9 19.2c.4 0 .57-.17.78-.37l1.87-1.79 3.88 2.84c.71.39 1.22.19 1.41-.66l2.56-12.02c.23-1.05-.38-1.46-1.07-1.2L3.62 11.8c-1.03.4-1.02.97-.18 1.23l3.86 1.2 8.95-5.65c.42-.26.8-.12.49.14l-7.7 6.59Z" />
@@ -25,15 +25,6 @@ export const SOCIALS = [
         <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
         <circle cx="12" cy="12" r="3.8" />
         <circle cx="17" cy="7" r="1.1" fill="currentColor" stroke="none" />
-      </svg>
-    ),
-  },
-  {
-    label: "Twitter",
-    href: "https://x.com/",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.5 3h3l-6.6 7.6L21.7 21h-6.1l-4.8-6.3L5.3 21h-3l7-8.1L2.5 3h6.2l4.3 5.7L17.5 3Zm-1.1 16.2h1.7L7.8 4.7H6L16.4 19.2Z" />
       </svg>
     ),
   },

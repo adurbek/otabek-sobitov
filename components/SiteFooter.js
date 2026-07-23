@@ -29,7 +29,11 @@ export default function SiteFooter() {
           <h5>Ijtimoiy tarmoqlar</h5>
           <ul className="foot-socials">
             <li>
-              <a href="https://t.me/" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://t.me/otabek_yuldashovich"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Telegram
               </a>
             </li>
