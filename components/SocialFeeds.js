@@ -1,20 +1,15 @@
-// Ijtimoiy tarmoq foydalanuvchi nomlarini shu yerda o'zgartiring.
-// Bo'sh qoldirilsa, lenta o'rniga havolali karta ko'rsatiladi.
-const ACCOUNTS = {
-  instagram: "otabek.yuldashevich.sobitov", // instagram.com/<nom>
-  facebook: "https://facebook.com/otabek.sobitov.9",
-  telegram: "https://t.me/otabek_yuldashovich",
-  linkedin: "https://www.linkedin.com/in/otabek-sobitov-136192369/",
-};
+// Instagram lentasi rasmiy embed orqali keladi. Facebook, Telegram va LinkedIn
+// ochiq embed bermaydi (shaxsiy profil / kanal emas / umuman API yo'q), shuning
+// uchun ular admin panelidan kiritilgan postlardan yig'iladi.
+const INSTAGRAM_ACCOUNT = "otabek.yuldashevich.sobitov";
+
+const NETWORKS = [
+  { key: "facebook", title: "Facebook", linkLabel: "Facebook sahifasini ochish ↗" },
+  { key: "telegram", title: "Telegram", linkLabel: "Telegram sahifasini ochish ↗" },
+  { key: "linkedin", title: "LinkedIn", linkLabel: "LinkedIn profilini ochish ↗" },
+];
 
 const ICONS = {
-  instagram: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
-      <circle cx="12" cy="12" r="3.8" />
-      <circle cx="17" cy="7" r="1.1" fill="currentColor" stroke="none" />
-    </svg>
-  ),
   facebook: (
     <svg viewBox="0 0 24 24" fill="currentColor">
       <path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.54-1.5h1.66V3.6c-.29-.04-1.27-.12-2.42-.12-2.4 0-4.03 1.46-4.03 4.15v2.27H7.5V13h2.75v8h3.25Z" />
@@ -32,89 +27,103 @@ const ICONS = {
   ),
 };
 
-function FeedCard({ brand, title, text, href, linkLabel }) {
+function FeedColumn({ network, profile, posts }) {
+  const url = profile?.profile_url || "";
   return (
-    <div className="feed-card">
-      <span className={`feed-card-icon brand-${brand}`}>{ICONS[brand]}</span>
-      <p>{text}</p>
-      {href && (
-        <a className="feed-btn" href={href} target="_blank" rel="noopener noreferrer">
-          {linkLabel}
+    <div className="feed-col">
+      <h3 className="feed-title">{network.title}</h3>
+      <div className="feed-embed">
+        <div className={`feed-head brand-${network.key}`}>
+          {profile?.avatar_url ? (
+            <img className="feed-avatar" src={profile.avatar_url} alt={profile.display_name} />
+          ) : (
+            <span className="feed-avatar feed-avatar-fallback">{ICONS[network.key]}</span>
+          )}
+          <span className="feed-head-text">
+            <b>{profile?.display_name || "Otabek Sobitov"}</b>
+            {profile?.handle && <span className="feed-handle">{profile.handle}</span>}
+            {profile?.followers && <span className="feed-count">{profile.followers}</span>}
+          </span>
+          <span className="feed-head-icon">{ICONS[network.key]}</span>
+        </div>
+
+        <div className="feed-scroll">
+          {posts.length === 0 && (
+            <p className="feed-empty">
+              Hozircha post qo&rsquo;shilmagan. Admin panelidagi &laquo;Ijtimoiy
+              tarmoqlar&raquo; bo&rsquo;limidan qo&rsquo;shishingiz mumkin.
+            </p>
+          )}
+          {posts.map((p) => {
+            const inner = (
+              <>
+                {p.image_url && <img src={p.image_url} alt="" />}
+                {p.body && <p>{p.body}</p>}
+                {p.date && <span className="feed-post-date">{p.date}</span>}
+              </>
+            );
+            return p.link_url ? (
+              <a
+                className="feed-post"
+                key={p.id}
+                href={p.link_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {inner}
+              </a>
+            ) : (
+              <div className="feed-post" key={p.id}>
+                {inner}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {url && (
+        <a className="feed-link" href={url} target="_blank" rel="noopener noreferrer">
+          {network.linkLabel}
         </a>
       )}
     </div>
   );
 }
 
-export default function SocialFeeds() {
-  const ig = ACCOUNTS.instagram;
-  const fb = ACCOUNTS.facebook;
-  const tg = ACCOUNTS.telegram;
-  const li = ACCOUNTS.linkedin;
+export default function SocialFeeds({ profiles = [], posts = [] }) {
+  const profileByNetwork = {};
+  for (const p of profiles) profileByNetwork[p.network] = p;
 
   return (
     <section className="container social-feeds">
       <div className="social-feeds-grid">
         <div className="feed-col">
           <h3 className="feed-title">Instagram</h3>
-          {ig ? (
-            <div className="feed-frame">
-              <iframe
-                src={`https://www.instagram.com/${ig}/embed`}
-                title="Instagram sahifasi"
-                loading="lazy"
-                allowtransparency="true"
-              />
-            </div>
-          ) : (
-            <FeedCard
-              brand="instagram"
-              text="Instagram sahifasidagi postlar bilan shu yerdan tanishishingiz mumkin."
-              href="https://www.instagram.com/"
-              linkLabel="Instagram sahifasini ochish ↗"
+          <div className="feed-frame">
+            <iframe
+              src={`https://www.instagram.com/${INSTAGRAM_ACCOUNT}/embed`}
+              title="Instagram sahifasi"
+              loading="lazy"
+              allowtransparency="true"
             />
-          )}
-          {ig && (
-            <a
-              className="feed-link"
-              href={`https://www.instagram.com/${ig}/`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Instagram sahifasini ochish ↗
-            </a>
-          )}
+          </div>
+          <a
+            className="feed-link"
+            href={`https://www.instagram.com/${INSTAGRAM_ACCOUNT}/`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram sahifasini ochish ↗
+          </a>
         </div>
 
-        <div className="feed-col">
-          <h3 className="feed-title">Facebook</h3>
-          <FeedCard
-            brand="facebook"
-            text="Facebook sahifasidagi postlar, e'lonlar va yangiliklar bilan shu yerdan tanishishingiz mumkin."
-            href={fb}
-            linkLabel="Facebook sahifasini ochish ↗"
+        {NETWORKS.map((n) => (
+          <FeedColumn
+            key={n.key}
+            network={n}
+            profile={profileByNetwork[n.key]}
+            posts={posts.filter((p) => p.network === n.key)}
           />
-        </div>
-
-        <div className="feed-col">
-          <h3 className="feed-title">Telegram</h3>
-          <FeedCard
-            brand="telegram"
-            text="Telegram sahifasidagi e'lonlar va yangiliklar bilan shu yerdan tanishishingiz mumkin."
-            href={tg}
-            linkLabel="Telegram sahifasini ochish ↗"
-          />
-        </div>
-
-        <div className="feed-col">
-          <h3 className="feed-title">LinkedIn</h3>
-          <FeedCard
-            brand="linkedin"
-            text="LinkedIn sahifasidagi postlar, video va rasmlar bilan shu yerdan tanishishingiz mumkin."
-            href={li}
-            linkLabel="LinkedIn profilini ochish ↗"
-          />
-        </div>
+        ))}
       </div>
     </section>
   );

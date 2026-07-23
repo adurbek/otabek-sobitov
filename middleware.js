@@ -14,6 +14,8 @@ export async function middleware(request) {
     pathname.startsWith("/api/videos") ||
     pathname.startsWith("/api/slides") ||
     pathname.startsWith("/api/upload") ||
+    pathname.startsWith("/api/social-profiles") ||
+    pathname.startsWith("/api/social-posts") ||
     pathname.startsWith("/api/about");
 
   if (!isAdminArea && !isAdminApi) return NextResponse.next();
@@ -38,5 +40,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/news/:path*", "/api/initiatives/:path*", "/api/travels/:path*", "/api/map-visits", "/api/map-visits/:path*", "/api/videos/:path*", "/api/slides/:path*", "/api/upload/:path*", "/api/upload", "/api/about/:path*"],
+  matcher: ["/admin/:path*", "/api/news/:path*", "/api/initiatives/:path*", "/api/travels/:path*", "/api/map-visits", "/api/map-visits/:path*", "/api/videos/:path*", "/api/slides/:path*", "/api/upload/:path*", "/api/upload", "/api/social-profiles", "/api/social-profiles/:path*", "/api/social-posts", "/api/social-posts/:path*", "/api/about/:path*"],
 };
