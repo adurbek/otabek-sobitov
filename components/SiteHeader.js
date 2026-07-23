@@ -104,13 +104,8 @@ export default function SiteHeader({ active }) {
           <span />
         </button>
 
-        <Link href="/" className="brand">
-          <img src="/gerb.png" alt="O'zbekiston Respublikasi gerbi" className="brand-gerb" />
-          <span className="brand-bar" />
-          <span className="brand-text">
-            <span className="brand-top">O&rsquo;ZBEKISTON RESPUBLIKASI</span>
-            <span className="brand-main">YOSHLAR PARLAMENTI RAISI</span>
-          </span>
+        <Link href="/" className="brand" data-no-i18n>
+          <span className="brand-name">Otabek Sobitov</span>
         </Link>
 
         <nav className="main-nav">
