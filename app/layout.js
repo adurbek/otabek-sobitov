@@ -5,7 +5,8 @@ export const metadata = {
   title: "Otabek Sobitov rasmiy sahifasi",
   description: "Rasmiy shaxsiy sahifa",
   icons: {
-    icon: "/gerb.png",
+    icon: "/logo-parliament.png",
+    apple: "/logo-parliament.png",
   },
 };
 
