@@ -1,7 +1,8 @@
 export const metadata = {
   title: "Admin — OTABEK SOBITOV",
   icons: {
-    icon: "/gerb.png",
+    icon: "/logo-parliament.png",
+    apple: "/logo-parliament.png",
   },
 };
 
