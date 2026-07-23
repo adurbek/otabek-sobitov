@@ -34,46 +34,35 @@ export default function AboutTabs({ about, awards }) {
 
       {tab === "maqom" && (
         <div className="subpanel active">
-          <div className="about-grid">
-            <div>
-              {about?.photo_url ? (
-                <div className="about-photo has-img">
-                  <img src={about.photo_url} alt={about?.full_name || "Portret"} />
-                </div>
-              ) : (
-                <div className="about-photo">[Portret rasmi]</div>
-              )}
-              <ul className="about-facts">
-                <li><span>To‘liq ism</span><span>{about?.full_name || "[Ism Familiya]"}</span></li>
-                <li><span>Yo‘nalish</span><span>{about?.direction || "[Faoliyat sohasi]"}</span></li>
-                <li><span>Joriy faoliyat</span><span>{about?.position || "[Lavozim / loyiha nomi]"}</span></li>
-                <li><span>Ta’lim</span><span>{about?.education || "[O‘quv muassasasi va yo‘nalish]"}</span></li>
-              </ul>
-              {about?.link_url && (
-                <a
-                  className="about-link-btn"
-                  href={about.link_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Batafsil ↗
-                </a>
-              )}
-            </div>
-            <div className="prose">
-              <h3>Qisqacha</h3>
-              <p>{about?.summary || "[Bu yerga o‘zingiz haqingizdagi qisqa tanishtiruv matni yoziladi.]"}</p>
-              {principles.length > 0 && (
-                <>
-                  <h3>Faoliyat tamoyillari</h3>
-                  <ol>
-                    {principles.map((p, i) => (
-                      <li key={i}>{p}</li>
-                    ))}
-                  </ol>
-                </>
-              )}
-            </div>
+          <div className="prose about-bio">
+            <h3>Qisqacha</h3>
+            {/* Rasm matn boshiga o'ngdan suzib turadi — matn uni aylanib oqadi. */}
+            {about?.photo_url && (
+              <figure className="about-photo-float">
+                <img src={about.photo_url} alt={about?.full_name || "Portret"} />
+              </figure>
+            )}
+            <p>{about?.summary || "[Bu yerga o‘zingiz haqingizdagi qisqa tanishtiruv matni yoziladi.]"}</p>
+            {principles.length > 0 && (
+              <>
+                <h3>Faoliyat tamoyillari</h3>
+                <ol>
+                  {principles.map((p, i) => (
+                    <li key={i}>{p}</li>
+                  ))}
+                </ol>
+              </>
+            )}
+            {about?.link_url && (
+              <a
+                className="about-link-btn"
+                href={about.link_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Batafsil ↗
+              </a>
+            )}
           </div>
         </div>
       )}

@@ -105,12 +105,13 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
 
 /* ===== ABOUT (Men haqimda) ===== */
-.about-grid{display:grid;grid-template-columns:280px 1fr;gap:56px;}
 .about-photo{background:var(--bg-alt);border:1px solid var(--line);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;text-align:center;}
-.about-facts{margin-top:20px;border-top:1px solid var(--line);}
-.about-facts li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px;gap:12px;}
-.about-facts li span:first-child{color:var(--muted);flex-shrink:0;}
-.about-facts li span:last-child{font-weight:600;text-align:right;}
+.about-bio{max-width:940px;}
+.about-bio::after{content:"";display:block;clear:both;}
+.about-bio p{text-align:justify;}
+.about-photo-float{float:right;width:290px;margin:4px 0 20px 32px;border:1px solid var(--line);overflow:hidden;}
+.about-photo-float img{width:100%;display:block;}
+.about-bio .about-link-btn{clear:both;}
 .prose h3{font-size:19px;margin:28px 0 12px;}
 .prose h3:first-child{margin-top:0;}
 .prose p{font-size:15px;line-height:1.85;color:#37415a;margin-bottom:14px;}
@@ -301,9 +302,12 @@ footer .foot-logo{color:#fff;font-family:'Manrope',sans-serif;font-weight:800;le
 footer .copy{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-top:20px;font-size:12px;color:#93a9c4;}
 
 @media(max-width:800px){
-  .about-grid,.travel-layout,.init-grid,.awards-grid,.footer-grid,.home-grid{grid-template-columns:1fr;}
+  .travel-layout,.init-grid,.awards-grid,.footer-grid,.home-grid{grid-template-columns:1fr;}
   .container{padding:0 20px;}
   .page-head h1,.hero h1{font-size:27px;}
+  /* Kichik ekranda rasm suzmaydi — matn tepasida to'liq kenglikda turadi. */
+  .about-photo-float{float:none;width:100%;max-width:320px;margin:0 auto 20px;}
+  .about-bio p{text-align:left;}
 }
 
 /* ===== ADMIN PANEL ===== */
