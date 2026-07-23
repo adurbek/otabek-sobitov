@@ -10,7 +10,7 @@ export const SOCIALS = [
   },
   {
     label: "Facebook",
-    href: "https://facebook.com/",
+    href: "https://facebook.com/otabek.sobitov.9",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor">
         <path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.54-1.5h1.66V3.6c-.29-.04-1.27-.12-2.42-.12-2.4 0-4.03 1.46-4.03 4.15v2.27H7.5V13h2.75v8h3.25Z" />
@@ -19,7 +19,7 @@ export const SOCIALS = [
   },
   {
     label: "Instagram",
-    href: "https://instagram.com/",
+    href: "https://www.instagram.com/otabek.yuldashevich.sobitov/",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
@@ -43,6 +43,15 @@ export const SOCIALS = [
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor">
         <path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.28 5 12 5 12 5s-6.28 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26.2 26.2 0 0 0 2 12a26.2 26.2 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.72 19 12 19 12 19s6.28 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26.2 26.2 0 0 0 22 12a26.2 26.2 0 0 0-.4-4.8ZM10 15.2V8.8l5.2 3.2-5.2 3.2Z" />
+      </svg>
+    ),
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/otabek-sobitov-136192369/",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6.94 8.5H3.6V21h3.34V8.5ZM5.27 3a1.94 1.94 0 1 0 0 3.88 1.94 1.94 0 0 0 0-3.88ZM20.4 13.7c0-3.36-1.8-4.93-4.2-4.93-1.93 0-2.8 1.06-3.28 1.8V8.5H9.58V21h3.34v-6.98c0-.37.03-.74.14-1 .3-.73.96-1.5 2.09-1.5 1.47 0 2.06 1.12 2.06 2.77V21h3.34v-7.3Z" />
       </svg>
     ),
   },

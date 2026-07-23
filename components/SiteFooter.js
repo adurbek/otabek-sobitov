@@ -44,7 +44,16 @@ export default function SiteFooter() {
             </li>
             <li>
               <a
-                href="https://www.linkedin.com/"
+                href="https://facebook.com/otabek.sobitov.9"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Facebook
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/otabek-sobitov-136192369/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
