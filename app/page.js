@@ -82,7 +82,7 @@ export default async function HomePage() {
 
       <section className="container socials-strip">
         <span className="socials-strip-label">
-          Partiya raisi ijtimoiy tarmoqlarda:
+          Otabek Sobitov ijtimoiy tarmoqlarda:
         </span>
         <div className="socials-strip-list">
           {SOCIALS.map((s) => (

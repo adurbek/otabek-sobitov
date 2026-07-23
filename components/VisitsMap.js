@@ -173,19 +173,6 @@ export default function VisitsMap({ visits }) {
         )}
       </div>
 
-      <div className="vmap-legend">
-        <span className="vmap-legend-item">
-          <i style={{ background: EMPTY_FILL }} /> Tashrif buyurilmagan
-        </span>
-        <span className="vmap-legend-item">
-          <i
-            style={{
-              background: `linear-gradient(to right, rgb(${LIGHT.join(",")}), rgb(${DARK.join(",")}))`,
-            }}
-          />{" "}
-          1 marta &rarr; ko&lsquo;p marta
-        </span>
-      </div>
     </section>
   );
 }

@@ -361,9 +361,6 @@ footer .copy{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-
 .vmap-tooltip b{display:block;font-family:'Manrope',sans-serif;font-size:13.5px;color:var(--navy);margin-bottom:2px;}
 .vmap-tooltip span{color:#1a53c0;font-weight:600;}
 .vmap-tooltip .vmap-tip-none{color:var(--muted);font-weight:400;}
-.vmap-legend{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:12.5px;color:var(--muted);}
-.vmap-legend-item{display:inline-flex;align-items:center;gap:8px;}
-.vmap-legend-item i{display:inline-block;width:38px;height:12px;border-radius:3px;border:1px solid var(--line);}
 .visit-counter{display:inline-flex;align-items:center;gap:10px;}
 .visit-counter b{min-width:22px;text-align:center;font-size:14px;}
 .visit-counter .btn-secondary{padding:4px 10px;line-height:1;}
