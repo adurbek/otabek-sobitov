@@ -29,6 +29,29 @@ const ICONS = {
 
 function FeedColumn({ network, profile, posts }) {
   const url = profile?.profile_url || "";
+  // Facebook Sahifasi (Page) havolasi kiritilgan bo'lsa, rasmiy plagin orqali
+  // jonli lenta ko'rsatiladi (shaxsiy profillar uchun Facebook buni bermaydi).
+  const pageUrl = network.key === "facebook" ? profile?.page_url : "";
+  if (pageUrl) {
+    return (
+      <div className="feed-col">
+        <h3 className="feed-title">{network.title}</h3>
+        <div className="feed-frame">
+          <iframe
+            src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
+              pageUrl
+            )}&tabs=timeline&width=380&height=540&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false`}
+            title="Facebook sahifasi"
+            loading="lazy"
+            allow="encrypted-media"
+          />
+        </div>
+        <a className="feed-link" href={pageUrl} target="_blank" rel="noopener noreferrer">
+          {network.linkLabel}
+        </a>
+      </div>
+    );
+  }
   return (
     <div className="feed-col">
       <h3 className="feed-title">{network.title}</h3>

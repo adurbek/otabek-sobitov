@@ -27,7 +27,7 @@ export default function AdminSocialPage() {
       const map = {};
       for (const p of profileList) map[p.network] = p;
       for (const n of NETWORKS) {
-        if (!map[n.key]) map[n.key] = { network: n.key, display_name: "", handle: "", avatar_url: "", followers: "", profile_url: "" };
+        if (!map[n.key]) map[n.key] = { network: n.key, display_name: "", handle: "", avatar_url: "", followers: "", profile_url: "", page_url: "" };
       }
       setProfiles(map);
       setPosts(postList);
@@ -141,6 +141,23 @@ export default function AdminSocialPage() {
               onChange={(e) => updateProfile(n.key, "profile_url", e.target.value)}
             />
           </div>
+          {n.key === "facebook" && (
+            <div className="field">
+              <label>Facebook Sahifasi (Page) havolasi — ixtiyoriy</label>
+              <input
+                value={profiles[n.key].page_url || ""}
+                onChange={(e) => updateProfile(n.key, "page_url", e.target.value)}
+                placeholder="https://www.facebook.com/sahifa-nomi"
+              />
+              <div className="field-hint">
+                Bu yerga <b>Sahifa (Page)</b> havolasi kiritilsa, karta Facebook&rsquo;ning
+                rasmiy plagini orqali jonli lentaga aylanadi — postlar avtomatik
+                chiqadi. Shaxsiy profil havolasi ishlamaydi: Facebook shaxsiy
+                profillar lentasini tashqariga bermaydi. Bo&rsquo;sh qoldirilsa,
+                quyida qo&rsquo;lda qo&rsquo;shilgan postlar ko&rsquo;rsatiladi.
+              </div>
+            </div>
+          )}
           <div className="form-actions">
             <button type="button" className="btn-primary" onClick={() => saveProfile(n.key)}>
               Saqlash
