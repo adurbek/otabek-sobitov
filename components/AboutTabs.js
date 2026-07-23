@@ -48,7 +48,6 @@ export default function AboutTabs({ about, awards }) {
                 <li><span>Yo‘nalish</span><span>{about?.direction || "[Faoliyat sohasi]"}</span></li>
                 <li><span>Joriy faoliyat</span><span>{about?.position || "[Lavozim / loyiha nomi]"}</span></li>
                 <li><span>Ta’lim</span><span>{about?.education || "[O‘quv muassasasi va yo‘nalish]"}</span></li>
-                <li><span>Manzil</span><span>{about?.location || "[Shahar, mamlakat]"}</span></li>
               </ul>
               {about?.link_url && (
                 <a

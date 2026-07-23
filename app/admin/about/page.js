@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import AdminShell from "@/components/AdminShell";
 import ImageUploadField from "@/components/ImageUploadField";
 
 export default function AdminAboutPage() {
+  const router = useRouter();
   const [about, setAbout] = useState(null);
   const [principlesText, setPrinciplesText] = useState("");
   const [awards, setAwards] = useState([]);
@@ -39,8 +41,18 @@ export default function AdminAboutPage() {
     });
     if (res.ok) {
       setStatus({ type: "success", message: "Saqlandi." });
+    } else if (res.status === 401) {
+      setStatus({
+        type: "error",
+        message: "Sessiya muddati tugagan. Qayta kiring — sahifa 3 soniyada login sahifasiga o‘tadi.",
+      });
+      setTimeout(() => router.push("/admin/login?next=/admin/about"), 3000);
     } else {
-      setStatus({ type: "error", message: "Saqlashda xatolik yuz berdi." });
+      const data = await res.json().catch(() => null);
+      setStatus({
+        type: "error",
+        message: data?.error || `Saqlashda xatolik yuz berdi (${res.status}).`,
+      });
     }
   }
 
@@ -113,10 +125,6 @@ export default function AdminAboutPage() {
         <div className="field">
           <label>Ta’lim</label>
           <input value={about.education || ""} onChange={(e) => updateField("education", e.target.value)} />
-        </div>
-        <div className="field">
-          <label>Manzil</label>
-          <input value={about.location || ""} onChange={(e) => updateField("location", e.target.value)} />
         </div>
         <div className="field">
           <label>Qisqacha (bosh sahifada ham ko‘rinadi)</label>

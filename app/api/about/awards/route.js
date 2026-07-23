@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import db from "@/lib/db";
 
 export const runtime = "nodejs";
+// Bazadan real vaqtda o'qishi va PUT/POST qabul qilishi uchun dinamik bo'lishi shart:
+// aks holda Next.js route'ni statik qilib qo'yadi va 405 qaytaradi.
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   const awards = await db.prepare("SELECT * FROM awards ORDER BY sort_order ASC, year DESC").all();

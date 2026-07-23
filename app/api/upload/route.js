@@ -46,6 +46,17 @@ export async function POST(request) {
     return NextResponse.json({ url: blob.url }, { status: 201 });
   }
 
+  // Vercel'da lokal fayl tizimi faqat o'qish uchun — token bo'lmasa aniq xabar beramiz.
+  if (process.env.VERCEL) {
+    return NextResponse.json(
+      {
+        error:
+          "Rasm saqlanmadi: Vercel Blob ulanmagan. Vercel loyihasida Storage → Blob store yarating (BLOB_READ_WRITE_TOKEN avtomatik qo'shiladi) va qayta deploy qiling.",
+      },
+      { status: 500 }
+    );
+  }
+
   const dir = path.join(process.cwd(), "public", "uploads");
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, name), bytes);
