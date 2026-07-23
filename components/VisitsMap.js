@@ -8,6 +8,8 @@ const EMPTY_FILL = "#dfe6f6";
 const UZ_HOME_FILL = "#3ecf1e";
 const LIGHT = [169, 190, 235]; // 1 marta — och ko‘k
 const DARK = [45, 74, 158]; // eng ko‘p — to‘q ko‘k
+// Hududlar xaritasi tashriflar soniga qarab emas, bir xil ko‘k rangda bo‘yaladi.
+const REGION_FILL = "#2d4a9e";
 
 function scaleColor(visits, max) {
   const t = max > 1 ? (visits - 1) / (max - 1) : 1;
@@ -15,7 +17,7 @@ function scaleColor(visits, max) {
   return `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
 }
 
-function MapSvg({ shapes, viewBox, visitMap, maxVisits, homeId, onHover, onLeave, zoom }) {
+function MapSvg({ shapes, viewBox, visitMap, maxVisits, homeId, onHover, onLeave, zoom, solidFill }) {
   return (
     <svg
       className="vmap-svg"
@@ -33,7 +35,9 @@ function MapSvg({ shapes, viewBox, visitMap, maxVisits, homeId, onHover, onLeave
         {shapes.map((s, si) => {
           const visits = visitMap[s.id];
           const isHome = s.id === homeId;
-          const fill = isHome
+          const fill = solidFill
+            ? solidFill
+            : isHome
             ? UZ_HOME_FILL
             : visits
             ? scaleColor(visits, maxVisits)
@@ -136,6 +140,7 @@ export default function VisitsMap({ visits }) {
             onHover={handleHover}
             onLeave={() => setTip(null)}
             zoom={zoom}
+            solidFill={REGION_FILL}
           />
         )}
 
