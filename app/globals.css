@@ -244,7 +244,10 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 
 /* ===== SOCIAL FEEDS (Instagram / LinkedIn) ===== */
 .social-feeds{padding:52px 32px 80px;}
-.social-feeds-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;align-items:start;}
+/* minmax(0,1fr): karta ichidagi keng element ustunni kengaytirib, Instagram
+   embedini siqib qo'ymasligi uchun. */
+.social-feeds-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;align-items:start;}
+.feed-col{min-width:0;}
 .feed-title{font-size:18px;color:var(--navy-3);margin-bottom:14px;}
 .feed-frame{border:1px solid var(--line);background:#fff;overflow:hidden;height:540px;}
 .feed-frame iframe{width:100%;height:100%;border:none;display:block;}
@@ -265,7 +268,7 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 .feed-verified{width:14px;height:14px;color:var(--brand);flex-shrink:0;}
 .feed-verified svg{width:100%;height:100%;display:block;}
 .feed-count{font-size:11px;color:#616770;}
-.feed-follow{display:inline-flex;align-items:center;gap:5px;flex-shrink:0;align-self:center;background:#e4e6eb;color:#050505;font-size:12px;font-weight:600;padding:5px 9px;border-radius:3px;line-height:1;}
+.feed-follow{display:inline-flex;align-items:center;gap:5px;flex-shrink:0;align-self:center;white-space:nowrap;background:#e4e6eb;color:#050505;font-size:12px;font-weight:600;padding:5px 9px;border-radius:3px;line-height:1;}
 .feed-follow:hover{background:#d8dade;}
 .feed-follow-icon{width:13px;height:13px;color:var(--brand);}
 .feed-follow-icon svg{width:100%;height:100%;display:block;}
