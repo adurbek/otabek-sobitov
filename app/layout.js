@@ -1,5 +1,6 @@
 import "./globals.css";
 import LanguageInit from "@/components/LanguageInit";
+import BugReporter from "@/components/BugReporter";
 
 export const metadata = {
   title: "Otabek Sobitov rasmiy sahifasi",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
       <body>
         <LanguageInit />
         {children}
+        <BugReporter />
       </body>
     </html>
   );
