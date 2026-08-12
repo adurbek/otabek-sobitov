@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import MultiLangField from "@/components/MultiLangField";
 
 const TAGS = ["Voqea", "Chiqish", "Matbuot e’lon"];
 
@@ -77,14 +78,19 @@ export default function NewsForm({ initial, newsId }) {
           ))}
         </select>
       </div>
-      <div className="field">
-        <label>Sarlavha</label>
-        <input value={form.title} onChange={(e) => update("title", e.target.value)} required />
-      </div>
-      <div className="field">
-        <label>Matn</label>
-        <textarea value={form.body} onChange={(e) => update("body", e.target.value)} />
-      </div>
+      <MultiLangField
+        label="Sarlavha"
+        value={form.title}
+        onChange={(v) => update("title", v)}
+        type="input"
+        hint="O'zbekcha yozing; Русский/English tab'larida tarjimani kiriting (o'sha yerda saqlanadi)."
+      />
+      <MultiLangField
+        label="Matn"
+        value={form.body}
+        onChange={(v) => update("body", v)}
+        type="textarea"
+      />
       <div className="field">
         <label>Rasm</label>
         <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={handleFileUpload} />

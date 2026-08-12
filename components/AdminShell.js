@@ -13,7 +13,6 @@ const LINKS = [
   { href: "/admin/visits", label: "Tashriflar xaritasi" },
   { href: "/admin/videos", label: "Videolar" },
   { href: "/admin/social", label: "Ijtimoiy tarmoqlar" },
-  { href: "/admin/translations", label: "Tarjimalar" },
   { href: "/admin/bug-reports", label: "Xato xabarlari" },
   { href: "/admin/security", label: "Xavfsizlik" },
 ];
