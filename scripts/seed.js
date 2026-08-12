@@ -34,8 +34,19 @@ if (!username || !password) {
   process.exit(1);
 }
 
-if (password.length < 8) {
-  console.error("ADMIN_PASSWORD kamida 8 belgidan iborat bo'lishi kerak.");
+// Kuchli parol talabi (admin-panel ichidagi tekshiruv bilan bir xil).
+function passwordError(pw) {
+  if (typeof pw !== "string" || pw.length < 12) return "kamida 12 belgi";
+  if (!/[a-z]/.test(pw)) return "kamida bitta kichik harf";
+  if (!/[A-Z]/.test(pw)) return "kamida bitta katta harf";
+  if (!/[0-9]/.test(pw)) return "kamida bitta raqam";
+  if (!/[^A-Za-z0-9]/.test(pw)) return "kamida bitta maxsus belgi";
+  return null;
+}
+
+const pwErr = passwordError(password);
+if (pwErr) {
+  console.error(`ADMIN_PASSWORD yetarlicha kuchli emas: ${pwErr} bo'lishi kerak.`);
   process.exit(1);
 }
 

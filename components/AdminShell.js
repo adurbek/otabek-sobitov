@@ -13,6 +13,7 @@ const LINKS = [
   { href: "/admin/visits", label: "Tashriflar xaritasi" },
   { href: "/admin/videos", label: "Videolar" },
   { href: "/admin/social", label: "Ijtimoiy tarmoqlar" },
+  { href: "/admin/security", label: "Xavfsizlik" },
 ];
 
 export default function AdminShell({ active, title, children }) {
