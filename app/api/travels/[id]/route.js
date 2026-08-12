@@ -10,11 +10,11 @@ export async function GET(_request, { params }) {
 }
 
 export async function PUT(request, { params }) {
-  const body = await request.json();
-  const { city = "", country = "", date_label = "", event = "", description = "", image_url = "", sort_order = 0 } = body || {};
+  const payload = await request.json();
+  const { city = "", country = "", date_label = "", event = "", description = "", body = "", image_url = "", sort_order = 0 } = payload || {};
   await db.prepare(
-    "UPDATE travels SET city=?, country=?, date_label=?, event=?, description=?, image_url=?, sort_order=? WHERE id=?"
-  ).run(city, country, date_label, event, description, image_url, sort_order, params.id);
+    "UPDATE travels SET city=?, country=?, date_label=?, event=?, description=?, body=?, image_url=?, sort_order=? WHERE id=?"
+  ).run(city, country, date_label, event, description, body, image_url, sort_order, params.id);
   const updated = await db.prepare("SELECT * FROM travels WHERE id = ?").get(params.id);
   if (!updated) return NextResponse.json({ error: "Topilmadi" }, { status: 404 });
   return NextResponse.json(updated);
@@ -22,5 +22,7 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(_request, { params }) {
   await db.prepare("DELETE FROM travels WHERE id = ?").run(params.id);
+  // Safar o'chirilsa, uning galereya rasmlari ham o'chiriladi.
+  await db.prepare("DELETE FROM travel_images WHERE travel_id = ?").run(params.id);
   return NextResponse.json({ ok: true });
 }

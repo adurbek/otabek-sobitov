@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import VisitsMap from "@/components/VisitsMap";
@@ -32,7 +33,7 @@ export default async function TravelsPage() {
         ) : (
           <div className="travel-cards">
             {travels.map((t) => (
-              <article className="travel-card" key={t.id}>
+              <Link className="travel-card" key={t.id} href={`/safarlar/${t.id}`}>
                 <div className="travel-card-img">
                   {t.image_url ? (
                     <img src={t.image_url} alt={t.city} />
@@ -41,20 +42,16 @@ export default async function TravelsPage() {
                   )}
                 </div>
                 <div className="travel-card-body">
+                  {t.date_label && <div className="travel-card-meta">{t.date_label}</div>}
                   <h3>
                     {t.city}
                     {t.country ? `, ${t.country}` : ""}
                   </h3>
-                  {(t.date_label || t.event) && (
-                    <div className="travel-card-meta">
-                      {t.date_label}
-                      {t.date_label && t.event ? " · " : ""}
-                      {t.event}
-                    </div>
-                  )}
+                  {t.event && <div className="travel-card-event">{t.event}</div>}
                   {t.description && <p>{t.description}</p>}
+                  <span className="travel-card-more">Batafsil →</span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         )}

@@ -12,16 +12,16 @@ export async function GET() {
 }
 
 export async function POST(request) {
-  const body = await request.json();
-  const { city = "", country = "", date_label = "", event = "", description = "", image_url = "", sort_order = 0 } = body || {};
+  const payload = await request.json();
+  const { city = "", country = "", date_label = "", event = "", description = "", body = "", image_url = "", sort_order = 0 } = payload || {};
   if (!city) {
     return NextResponse.json({ error: "Shahar nomi talab qilinadi" }, { status: 400 });
   }
   const result = await db
     .prepare(
-      "INSERT INTO travels (city, country, date_label, event, description, image_url, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?)"
+      "INSERT INTO travels (city, country, date_label, event, description, body, image_url, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
     )
-    .run(city, country, date_label, event, description, image_url, sort_order);
+    .run(city, country, date_label, event, description, body, image_url, sort_order);
   const created = await db.prepare("SELECT * FROM travels WHERE id = ?").get(result.lastInsertRowid);
   return NextResponse.json(created, { status: 201 });
 }

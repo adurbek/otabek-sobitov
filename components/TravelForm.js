@@ -3,12 +3,21 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ImageUploadField from "@/components/ImageUploadField";
+import TravelGallery from "@/components/TravelGallery";
 
 export default function TravelForm({ initial, itemId }) {
   const router = useRouter();
-  const [form, setForm] = useState(
-    initial || { city: "", country: "", date_label: "", event: "", description: "", image_url: "", sort_order: 0 }
-  );
+  const [form, setForm] = useState({
+    city: "",
+    country: "",
+    date_label: "",
+    event: "",
+    description: "",
+    body: "",
+    image_url: "",
+    sort_order: 0,
+    ...(initial || {}),
+  });
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -38,6 +47,7 @@ export default function TravelForm({ initial, itemId }) {
   }
 
   return (
+    <>
     <form className="admin-form" onSubmit={handleSubmit}>
       {error && <div className="alert alert-error">{error}</div>}
       <div className="field">
@@ -57,14 +67,24 @@ export default function TravelForm({ initial, itemId }) {
         <input value={form.event} onChange={(e) => update("event", e.target.value)} />
       </div>
       <div className="field">
-        <label>Tavsif</label>
+        <label>Qisqa tavsif (kartada ko'rinadi)</label>
         <textarea value={form.description} onChange={(e) => update("description", e.target.value)} />
+        <div className="field-hint">Safarlar sahifasidagi kartochkada chiqadi (~2 abzas).</div>
+      </div>
+      <div className="field">
+        <label>To'liq ma'lumot (batafsil sahifada)</label>
+        <textarea
+          value={form.body}
+          onChange={(e) => update("body", e.target.value)}
+          style={{ minHeight: 160 }}
+        />
+        <div className="field-hint">Kartaga bosilganda ochiladigan ichki sahifada to'liq matn chiqadi. Yangi abzas uchun bo'sh qator qoldiring.</div>
       </div>
       <ImageUploadField
-        label="Safar rasmi"
+        label="Asosiy rasm"
         value={form.image_url}
         onChange={(url) => update("image_url", url)}
-        hint="Safarlar sahifasidagi kartochkada chiqadi. Gorizontal rasm tavsiya etiladi."
+        hint="Kartochkada va batafsil sahifa tepasida chiqadi. Gorizontal rasm tavsiya etiladi."
       />
       <div className="field">
         <label>Tartib raqami</label>
@@ -82,5 +102,14 @@ export default function TravelForm({ initial, itemId }) {
         <a className="btn-secondary" href="/admin/travels">Bekor qilish</a>
       </div>
     </form>
+
+    {itemId ? (
+      <TravelGallery travelId={itemId} />
+    ) : (
+      <p className="field-hint" style={{ marginTop: 16 }}>
+        Galereya rasmlarini qo'shish uchun avval safarni saqlang, so'ng uni tahrirlashga qayting.
+      </p>
+    )}
+    </>
   );
 }
