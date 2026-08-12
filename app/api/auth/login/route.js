@@ -23,16 +23,17 @@ export async function POST(request) {
     return NextResponse.json({ error: "Noto'g'ri so'rov" }, { status: 400 });
   }
 
-  const { username, password } = body || {};
-  if (!username || !password) {
-    return NextResponse.json({ error: "Login va parol talab qilinadi" }, { status: 400 });
+  const { password } = body || {};
+  if (!password) {
+    return NextResponse.json({ error: "Parol talab qilinadi" }, { status: 400 });
   }
 
-  const user = await db.prepare("SELECT * FROM users WHERE username = ?").get(username);
+  // Faqat parol bilan kirish: yagona admin qatori bo'yicha tekshiriladi.
+  const user = await db.prepare("SELECT * FROM users ORDER BY id ASC LIMIT 1").get();
   const passwordMatches = user ? bcrypt.compareSync(password, user.password_hash) : false;
 
   if (!user || !passwordMatches) {
-    return NextResponse.json({ error: "Login yoki parol noto'g'ri" }, { status: 401 });
+    return NextResponse.json({ error: "Parol noto'g'ri" }, { status: 401 });
   }
 
   const token = await createSessionToken(user.username);
