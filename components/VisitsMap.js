@@ -52,6 +52,7 @@ function MapSvg({ shapes, viewBox, visitMap, maxVisits, homeId, onHover, onLeave
               className={visits && !isHome ? "vmap-shape visited" : "vmap-shape"}
               onMouseMove={(e) => onHover(e, s, visits)}
               onMouseLeave={onLeave}
+              onTouchStart={(e) => onHover(e, s, visits)}
             />
           );
         })}
@@ -84,9 +85,21 @@ export default function VisitsMap({ visits }) {
   function handleHover(e, shape, count) {
     const rect = wrapRef.current?.getBoundingClientRect();
     if (!rect) return;
+    // Sichqoncha va teginish (touch) uchun bir xil ishlaydi.
+    const point = e.touches && e.touches.length ? e.touches[0] : e;
+    const TIP_W = 170;
+    const TIP_H = 64;
+    const GAP = 14;
+    let x = point.clientX - rect.left + GAP;
+    let y = point.clientY - rect.top + GAP;
+    // Tooltip ekran chetidan chiqib ketmasligi uchun chegaralanadi.
+    if (x + TIP_W > rect.width) x = point.clientX - rect.left - TIP_W - GAP;
+    if (x < 4) x = 4;
+    if (y + TIP_H > rect.height) y = rect.height - TIP_H - 4;
+    if (y < 4) y = 4;
     setTip({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+      x,
+      y,
       name: shape.name,
       count: count || 0,
       home: tab === "world" && shape.id === "UZ",
@@ -118,7 +131,14 @@ export default function VisitsMap({ visits }) {
         </button>
       </div>
 
-      <div className="vmap-stage" ref={wrapRef}>
+      <div
+        className="vmap-stage"
+        ref={wrapRef}
+        onTouchStart={(e) => {
+          // Xarita tashqarisiga (bo'sh joyga) teginilsa tooltip yopiladi.
+          if (e.target === e.currentTarget) setTip(null);
+        }}
+      >
         {isWorld ? (
           <MapSvg
             shapes={WORLD}
@@ -162,7 +182,7 @@ export default function VisitsMap({ visits }) {
         {tip && (
           <div
             className="vmap-tooltip"
-            style={{ left: tip.x + 14, top: tip.y + 14 }}
+            style={{ left: tip.x, top: tip.y }}
           >
             <b>{tip.name}</b>
             {tip.home ? (

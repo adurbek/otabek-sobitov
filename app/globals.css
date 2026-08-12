@@ -390,9 +390,13 @@ footer .copy{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-
 .visit-counter b{min-width:22px;text-align:center;font-size:14px;}
 .visit-counter .btn-secondary{padding:4px 10px;line-height:1;}
 @media(max-width:640px){
-  .vmap-tab{font-size:12.5px;letter-spacing:.03em;}
+  .vmap-tab{font-size:12.5px;letter-spacing:.03em;padding:12px 6px;}
   .vmap-zoom{right:4px;}
   .vmap-zoom button{width:36px;height:36px;}
+  .vmap-stage{overflow:hidden;}
+  .vmap-svg{touch-action:pan-y;}
+  .vmap-tooltip{min-width:0;max-width:62vw;padding:8px 11px;font-size:12px;}
+  .vmap-tooltip b{font-size:12.5px;}
 }
 
 /* ===== ABOUT PHOTO / AWARD MEDIA ===== */
