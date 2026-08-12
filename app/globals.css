@@ -29,13 +29,15 @@ img{max-width:100%;display:block;}
 
 /* ===== HEADER ===== */
 header{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--line);}
-.header-inner{display:flex;align-items:center;gap:26px;height:82px;}
+.header-inner{display:flex;align-items:center;gap:26px;height:82px;position:relative;}
 .burger-btn{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;}
 .burger-btn span{display:block;width:26px;height:3px;border-radius:2px;background:var(--navy-3);}
 .brand{display:flex;align-items:center;margin-right:auto;}
 .brand-name{font-family:'Manrope',sans-serif;font-size:25px;font-weight:800;text-transform:uppercase;letter-spacing:.13em;color:var(--navy-3);line-height:1;white-space:nowrap;transition:color .2s;}
 .brand:hover .brand-name{color:var(--navy);}
-nav.main-nav{display:flex;align-items:center;}
+/* Nav sarlavha bloklaridan mustaqil ravishda header markazida turadi;
+   brand chapda, til+qidiruv o'ngda qoladi. */
+nav.main-nav{display:flex;align-items:center;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);}
 nav.main-nav a{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--navy);padding:6px 14px;border-left:1px solid var(--line);transition:.2s;white-space:nowrap;}
 nav.main-nav a:last-child{border-right:1px solid var(--line);}
 nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
