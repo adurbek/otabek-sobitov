@@ -8,6 +8,9 @@ export const dynamic = "force-dynamic";
 export default async function AboutPage() {
   const about = await db.prepare("SELECT * FROM about WHERE id = 1").get();
   const awards = await db.prepare("SELECT * FROM awards ORDER BY sort_order ASC, year DESC").all();
+  const timeline = await db
+    .prepare("SELECT * FROM about_timeline ORDER BY sort_order ASC, year DESC, id ASC")
+    .all();
 
   return (
     <>
@@ -22,7 +25,7 @@ export default async function AboutPage() {
       </div>
 
       <div className="container page-body">
-        <AboutTabs about={about} awards={awards} />
+        <AboutTabs about={about} awards={awards} timeline={timeline} />
       </div>
 
       <SiteFooter />

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import AdminShell from "@/components/AdminShell";
 import ImageUploadField from "@/components/ImageUploadField";
 import MultiLangField from "@/components/MultiLangField";
+import AboutTimeline from "@/components/AboutTimeline";
 
 export default function AdminAboutPage() {
   const router = useRouter();
@@ -163,11 +164,45 @@ export default function AdminAboutPage() {
           onChange={(v) => updateField("bio_social", v)}
           type="textarea"
         />
+        <div className="field-hint" style={{ marginTop: -6, marginBottom: 18 }}>
+          Yuqoridagi 3 matn faqat &laquo;Yillar bo&lsquo;yicha&raquo; bosqichlar
+          qo&lsquo;shilmagan bo&lsquo;lsa ko&lsquo;rsatiladi (pastdagi timeline
+          asosiy hisoblanadi).
+        </div>
+
+        <h3 style={{ margin: "24px 0 16px" }}>Aloqa uchun</h3>
+        <div className="field">
+          <label>Email</label>
+          <input
+            value={about.contact_email || ""}
+            onChange={(e) => updateField("contact_email", e.target.value)}
+            placeholder="masalan: info@example.uz"
+          />
+        </div>
+        <div className="field">
+          <label>Telefon</label>
+          <input
+            value={about.contact_phone || ""}
+            onChange={(e) => updateField("contact_phone", e.target.value)}
+            placeholder="+998 ..."
+          />
+        </div>
+        <div className="field">
+          <label>Manzil</label>
+          <input
+            value={about.contact_address || ""}
+            onChange={(e) => updateField("contact_address", e.target.value)}
+            placeholder="Ish/qabul manzili"
+          />
+          <div className="field-hint">To‘ldirilgan maydonlar «Men haqimda» sahifasi oxirida chiroyli chiqadi.</div>
+        </div>
 
         <div className="form-actions">
           <button type="submit" className="btn-primary">Saqlash</button>
         </div>
       </form>
+
+      <AboutTimeline />
 
       <h3 style={{ marginBottom: 16 }}>Mukofotlar</h3>
       <form className="admin-form" onSubmit={handleAddAward} style={{ marginBottom: 24 }}>

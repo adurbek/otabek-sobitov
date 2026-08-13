@@ -445,6 +445,43 @@ footer .copy{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-
 .award-link{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--navy-3);}
 .award-link:hover{color:var(--navy);}
 
+/* ===== TARJIMAI HOL — YILLAR TIMELINE ===== */
+.tl{max-width:820px;border-left:2px solid var(--line);margin-left:6px;}
+.tl-item{position:relative;padding:0 0 30px 30px;}
+.tl-item:last-child{padding-bottom:4px;}
+.tl-item::before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--navy-3);}
+.tl-year{font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:var(--navy-3);letter-spacing:.02em;margin-bottom:4px;}
+.tl-title{font-size:16.5px;color:var(--ink);font-family:'Manrope',sans-serif;font-weight:700;margin-bottom:6px;}
+.tl-body p{font-size:14.5px;line-height:1.75;color:#37415a;margin-bottom:8px;}
+
+/* ===== MUKOFOT KARTA (bosiladigan) + MODAL ===== */
+.award-card-btn{cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:6px;font-family:inherit;transition:box-shadow .2s,transform .2s,border-color .2s;}
+.award-card-btn:hover{box-shadow:0 10px 28px rgba(20,33,58,.12);transform:translateY(-2px);border-color:#cdd6e6;}
+.award-card-btn .yr{font-size:12px;font-weight:700;color:var(--navy-3);letter-spacing:.06em;}
+.award-card-btn h4{font-size:16px;color:var(--ink);font-family:'Manrope',sans-serif;font-weight:700;margin:2px 0 0;line-height:1.4;}
+.award-more{margin-top:8px;font-size:12.5px;font-weight:700;color:var(--navy-3);}
+.award-card-btn:hover .award-more{color:var(--navy);}
+.award-modal-overlay{position:fixed;inset:0;background:rgba(8,20,40,.6);z-index:400;display:flex;align-items:center;justify-content:center;padding:20px;}
+.award-modal{position:relative;background:#fff;border-radius:16px;width:min(560px,94vw);max-height:90vh;overflow-y:auto;box-shadow:0 24px 70px rgba(5,15,32,.4);}
+.award-modal-close{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.9);border:none;width:32px;height:32px;border-radius:50%;font-size:16px;color:#5b6572;cursor:pointer;z-index:2;}
+.award-modal-close:hover{color:var(--navy);}
+.award-modal-img{background:#e9edf5;overflow:hidden;border-radius:16px 16px 0 0;}
+.award-modal-img img{width:100%;max-height:340px;object-fit:cover;display:block;}
+.award-modal-body{padding:24px 28px 28px;}
+.award-modal-body .yr{font-size:12.5px;font-weight:700;color:var(--navy-3);letter-spacing:.06em;}
+.award-modal-body h3{font-size:20px;margin:6px 0 12px;line-height:1.35;}
+.award-modal-body p{font-size:14.5px;line-height:1.75;color:#37415a;}
+
+/* ===== ALOQA BO'LIMI ===== */
+.contact-block{margin-top:44px;padding-top:32px;border-top:1px solid var(--line);}
+.contact-title{font-size:18px;margin-bottom:18px;}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
+.contact-item{display:flex;align-items:center;gap:14px;background:var(--bg-alt);border:1px solid var(--line);border-radius:12px;padding:16px 18px;transition:border-color .2s,box-shadow .2s;}
+a.contact-item:hover{border-color:var(--navy-3);box-shadow:0 8px 22px rgba(20,33,58,.08);}
+.contact-ic{width:42px;height:42px;flex-shrink:0;border-radius:50%;background:var(--navy-3);color:#fff;display:flex;align-items:center;justify-content:center;}
+.contact-text{display:flex;flex-direction:column;font-size:14px;color:var(--ink);min-width:0;word-break:break-word;}
+.contact-text b{font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;}
+
 /* ===== TRAVEL CARDS ===== */
 .travels-body{padding-top:10px;}
 .travel-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}

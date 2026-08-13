@@ -26,10 +26,13 @@ export async function PUT(request) {
     bio_social = "",
     photo_url = "",
     link_url = "",
+    contact_email = "",
+    contact_phone = "",
+    contact_address = "",
   } = body || {};
 
   await db.prepare(
-    `UPDATE about SET full_name=?, direction=?, position=?, education=?, location=?, summary=?, principles=?, bio_education=?, bio_career=?, bio_social=?, photo_url=?, link_url=? WHERE id=1`
+    `UPDATE about SET full_name=?, direction=?, position=?, education=?, location=?, summary=?, principles=?, bio_education=?, bio_career=?, bio_social=?, photo_url=?, link_url=?, contact_email=?, contact_phone=?, contact_address=? WHERE id=1`
   ).run(
     full_name,
     direction,
@@ -42,7 +45,10 @@ export async function PUT(request) {
     bio_career,
     bio_social,
     photo_url,
-    link_url
+    link_url,
+    contact_email,
+    contact_phone,
+    contact_address
   );
 
   const updated = await db.prepare("SELECT * FROM about WHERE id = 1").get();
