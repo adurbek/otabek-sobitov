@@ -160,7 +160,6 @@ export default function VisitsMap({ visits }) {
             onHover={handleHover}
             onLeave={() => setTip(null)}
             zoom={zoom}
-            solidFill={REGION_FILL}
           />
         )}
 
