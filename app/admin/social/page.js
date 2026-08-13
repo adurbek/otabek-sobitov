@@ -5,12 +5,13 @@ import AdminShell from "@/components/AdminShell";
 import ImageUploadField from "@/components/ImageUploadField";
 
 const NETWORKS = [
+  { key: "instagram", label: "Instagram" },
   { key: "facebook", label: "Facebook" },
   { key: "telegram", label: "Telegram" },
   { key: "linkedin", label: "LinkedIn" },
 ];
 
-const EMPTY_POST = { network: "facebook", image_url: "", body: "", link_url: "", date: "", sort_order: 0 };
+const EMPTY_POST = { network: "instagram", image_url: "", body: "", link_url: "", date: "", sort_order: 0 };
 
 export default function AdminSocialPage() {
   const [profiles, setProfiles] = useState({});

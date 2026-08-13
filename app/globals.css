@@ -260,6 +260,7 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 .feed-embed.brand-facebook{--brand:#1877f2;}
 .feed-embed.brand-telegram{--brand:#229ed9;}
 .feed-embed.brand-linkedin{--brand:#0a66c2;}
+.feed-embed.brand-instagram{--brand:#e1306c;}
 .feed-head{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-bottom:1px solid #dddfe2;}
 .feed-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1px solid #dddfe2;background:#fff;}
 .feed-avatar-fallback{display:flex;align-items:center;justify-content:center;color:#fff;background:var(--brand);border-color:transparent;}

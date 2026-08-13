@@ -1,15 +1,19 @@
 // Instagram lentasi rasmiy embed orqali keladi. Facebook, Telegram va LinkedIn
 // ochiq embed bermaydi (shaxsiy profil / kanal emas / umuman API yo'q), shuning
 // uchun ular admin panelidan kiritilgan postlardan yig'iladi.
-const INSTAGRAM_ACCOUNT = "otabek.yuldashevich.sobitov";
-
 const NETWORKS = [
+  { key: "instagram", title: "Instagram", linkLabel: "Instagram sahifasini ochish ↗" },
   { key: "facebook", title: "Facebook", linkLabel: "Facebook sahifasini ochish ↗" },
   { key: "telegram", title: "Telegram", linkLabel: "Telegram sahifasini ochish ↗" },
   { key: "linkedin", title: "LinkedIn", linkLabel: "LinkedIn profilini ochish ↗" },
 ];
 
 const ICONS = {
+  instagram: (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 8.1a3.9 3.9 0 1 0 0 7.8 3.9 3.9 0 0 0 0-7.8Zm0 6.43a2.53 2.53 0 1 1 0-5.06 2.53 2.53 0 0 1 0 5.06Zm4.97-6.6a.91.91 0 1 1-1.82 0 .91.91 0 0 1 1.82 0ZM19.6 8.96c-.06-1.22-.34-2.3-1.23-3.19-.89-.89-1.97-1.17-3.19-1.23-1.26-.07-5.03-.07-6.29 0-1.21.06-2.29.34-3.19 1.23-.89.89-1.16 1.97-1.23 3.18-.07 1.26-.07 5.04 0 6.3.06 1.21.34 2.29 1.23 3.18.9.89 1.98 1.17 3.19 1.23 1.26.07 5.03.07 6.29 0 1.22-.06 2.3-.34 3.19-1.23.89-.89 1.17-1.97 1.23-3.18.07-1.26.07-5.03 0-6.29Zm-1.62 7.64a2.56 2.56 0 0 1-1.44 1.44c-1 .4-3.36.31-4.46.31-1.1 0-3.47.08-4.46-.31a2.56 2.56 0 0 1-1.44-1.44c-.4-1-.31-3.36-.31-4.46 0-1.1-.08-3.47.31-4.46a2.56 2.56 0 0 1 1.44-1.44c1-.4 3.36-.31 4.46-.31 1.1 0 3.47-.08 4.46.31.67.26 1.18.78 1.44 1.44.4 1 .31 3.36.31 4.46 0 1.1.09 3.46-.31 4.46Z" />
+    </svg>
+  ),
   facebook: (
     <svg viewBox="0 0 24 24" fill="currentColor">
       <path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.54-1.5h1.66V3.6c-.29-.04-1.27-.12-2.42-.12-2.4 0-4.03 1.46-4.03 4.15v2.27H7.5V13h2.75v8h3.25Z" />
@@ -145,26 +149,6 @@ export default function SocialFeeds({ profiles = [], posts = [] }) {
   return (
     <section className="container social-feeds">
       <div className="social-feeds-grid">
-        <div className="feed-col">
-          <h3 className="feed-title">Instagram</h3>
-          <div className="feed-frame">
-            <iframe
-              src={`https://www.instagram.com/${INSTAGRAM_ACCOUNT}/embed`}
-              title="Instagram sahifasi"
-              loading="lazy"
-              allowtransparency="true"
-            />
-          </div>
-          <a
-            className="feed-link"
-            href={`https://www.instagram.com/${INSTAGRAM_ACCOUNT}/`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Instagram sahifasini ochish ↗
-          </a>
-        </div>
-
         {NETWORKS.map((n) => (
           <FeedColumn
             key={n.key}
