@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import MultiLangField from "@/components/MultiLangField";
 
 export default function SlideForm({ initial, itemId }) {
   const router = useRouter();
@@ -62,10 +63,12 @@ export default function SlideForm({ initial, itemId }) {
   return (
     <form className="admin-form" onSubmit={handleSubmit}>
       {error && <div className="alert alert-error">{error}</div>}
-      <div className="field">
-        <label>Sarlavha (rasm ustida chiqadi)</label>
-        <input value={form.title} onChange={(e) => update("title", e.target.value)} required />
-      </div>
+      <MultiLangField
+        label="Sarlavha (rasm ustida chiqadi)"
+        value={form.title}
+        onChange={(v) => update("title", v)}
+        type="input"
+      />
       <div className="field">
         <label>Sana (ixtiyoriy)</label>
         <input

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AdminShell from "@/components/AdminShell";
 import ImageUploadField from "@/components/ImageUploadField";
+import MultiLangField from "@/components/MultiLangField";
 
 export default function AdminAboutPage() {
   const router = useRouter();
@@ -114,40 +115,54 @@ export default function AdminAboutPage() {
           <label>To‘liq ism</label>
           <input value={about.full_name || ""} onChange={(e) => updateField("full_name", e.target.value)} />
         </div>
-        <div className="field">
-          <label>Yo‘nalish (bosh sahifadagi sarlavha sifatida ham ishlatiladi)</label>
-          <input value={about.direction || ""} onChange={(e) => updateField("direction", e.target.value)} />
-        </div>
-        <div className="field">
-          <label>Joriy faoliyat</label>
-          <input value={about.position || ""} onChange={(e) => updateField("position", e.target.value)} />
-        </div>
-        <div className="field">
-          <label>Ta’lim</label>
-          <input value={about.education || ""} onChange={(e) => updateField("education", e.target.value)} />
-        </div>
-        <div className="field">
-          <label>Qisqacha (bosh sahifada ham ko‘rinadi)</label>
-          <textarea value={about.summary || ""} onChange={(e) => updateField("summary", e.target.value)} />
-        </div>
+        <MultiLangField
+          label="Yo‘nalish (bosh sahifadagi sarlavha sifatida ham ishlatiladi)"
+          value={about.direction || ""}
+          onChange={(v) => updateField("direction", v)}
+          type="input"
+        />
+        <MultiLangField
+          label="Joriy faoliyat"
+          value={about.position || ""}
+          onChange={(v) => updateField("position", v)}
+          type="input"
+        />
+        <MultiLangField
+          label="Ta’lim"
+          value={about.education || ""}
+          onChange={(v) => updateField("education", v)}
+          type="input"
+        />
+        <MultiLangField
+          label="Qisqacha (bosh sahifada ham ko‘rinadi)"
+          value={about.summary || ""}
+          onChange={(v) => updateField("summary", v)}
+          type="textarea"
+        />
         <div className="field">
           <label>Faoliyat tamoyillari (har birini alohida qatorga yozing)</label>
           <textarea value={principlesText} onChange={(e) => setPrinciplesText(e.target.value)} />
         </div>
 
         <h3 style={{ margin: "24px 0 16px" }}>Tarjimai hol</h3>
-        <div className="field">
-          <label>Ta’lim (batafsil)</label>
-          <textarea value={about.bio_education || ""} onChange={(e) => updateField("bio_education", e.target.value)} />
-        </div>
-        <div className="field">
-          <label>Kasbiy faoliyat</label>
-          <textarea value={about.bio_career || ""} onChange={(e) => updateField("bio_career", e.target.value)} />
-        </div>
-        <div className="field">
-          <label>Ijtimoiy va boshqa faoliyat</label>
-          <textarea value={about.bio_social || ""} onChange={(e) => updateField("bio_social", e.target.value)} />
-        </div>
+        <MultiLangField
+          label="Ta’lim (batafsil)"
+          value={about.bio_education || ""}
+          onChange={(v) => updateField("bio_education", v)}
+          type="textarea"
+        />
+        <MultiLangField
+          label="Kasbiy faoliyat"
+          value={about.bio_career || ""}
+          onChange={(v) => updateField("bio_career", v)}
+          type="textarea"
+        />
+        <MultiLangField
+          label="Ijtimoiy va boshqa faoliyat"
+          value={about.bio_social || ""}
+          onChange={(v) => updateField("bio_social", v)}
+          type="textarea"
+        />
 
         <div className="form-actions">
           <button type="submit" className="btn-primary">Saqlash</button>

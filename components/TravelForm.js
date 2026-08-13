@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ImageUploadField from "@/components/ImageUploadField";
 import TravelGallery from "@/components/TravelGallery";
+import MultiLangField from "@/components/MultiLangField";
 
 export default function TravelForm({ initial, itemId }) {
   const router = useRouter();
@@ -62,24 +63,26 @@ export default function TravelForm({ initial, itemId }) {
         <label>Sana (masalan: Iyun 2026)</label>
         <input value={form.date_label} onChange={(e) => update("date_label", e.target.value)} />
       </div>
-      <div className="field">
-        <label>Tadbir nomi</label>
-        <input value={form.event} onChange={(e) => update("event", e.target.value)} />
-      </div>
-      <div className="field">
-        <label>Qisqa tavsif (kartada ko'rinadi)</label>
-        <textarea value={form.description} onChange={(e) => update("description", e.target.value)} />
-        <div className="field-hint">Safarlar sahifasidagi kartochkada chiqadi (~2 abzas).</div>
-      </div>
-      <div className="field">
-        <label>To'liq ma'lumot (batafsil sahifada)</label>
-        <textarea
-          value={form.body}
-          onChange={(e) => update("body", e.target.value)}
-          style={{ minHeight: 160 }}
-        />
-        <div className="field-hint">Kartaga bosilganda ochiladigan ichki sahifada to'liq matn chiqadi. Yangi abzas uchun bo'sh qator qoldiring.</div>
-      </div>
+      <MultiLangField
+        label="Tadbir nomi"
+        value={form.event}
+        onChange={(v) => update("event", v)}
+        type="input"
+      />
+      <MultiLangField
+        label="Qisqa tavsif (kartada ko'rinadi)"
+        value={form.description}
+        onChange={(v) => update("description", v)}
+        type="textarea"
+        hint="Safarlar sahifasidagi kartochkada chiqadi (~2 abzas)."
+      />
+      <MultiLangField
+        label="To'liq ma'lumot (batafsil sahifada)"
+        value={form.body}
+        onChange={(v) => update("body", v)}
+        type="textarea"
+        hint="Kartaga bosilganda ochiladigan ichki sahifada to'liq matn chiqadi. Yangi abzas uchun bo'sh qator qoldiring."
+      />
       <ImageUploadField
         label="Asosiy rasm"
         value={form.image_url}

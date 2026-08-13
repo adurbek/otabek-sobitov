@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import MultiLangField from "@/components/MultiLangField";
 
 export default function InitiativeForm({ initial, itemId }) {
   const router = useRouter();
@@ -39,14 +40,18 @@ export default function InitiativeForm({ initial, itemId }) {
   return (
     <form className="admin-form" onSubmit={handleSubmit}>
       {error && <div className="alert alert-error">{error}</div>}
-      <div className="field">
-        <label>Nomi</label>
-        <input value={form.title} onChange={(e) => update("title", e.target.value)} required />
-      </div>
-      <div className="field">
-        <label>Tavsif</label>
-        <textarea value={form.description} onChange={(e) => update("description", e.target.value)} />
-      </div>
+      <MultiLangField
+        label="Nomi"
+        value={form.title}
+        onChange={(v) => update("title", v)}
+        type="input"
+      />
+      <MultiLangField
+        label="Tavsif"
+        value={form.description}
+        onChange={(v) => update("description", v)}
+        type="textarea"
+      />
       <div className="field">
         <label>Belgi (emoji yoki belgi, ixtiyoriy)</label>
         <input value={form.icon} onChange={(e) => update("icon", e.target.value)} />
