@@ -19,13 +19,6 @@ export default function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h5>Bog‘lanish</h5>
-          <ul>
-            <li>Matbuot xizmati</li>
-            <li>Murojaat</li>
-          </ul>
-        </div>
-        <div>
           <h5>Ijtimoiy tarmoqlar</h5>
           <ul className="foot-socials">
             <li>

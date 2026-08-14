@@ -317,7 +317,7 @@ a.feed-post:hover{border-color:var(--brand);}
 
 /* ===== FOOTER ===== */
 footer{background:var(--navy);color:#c7d6e8;padding:56px 0 26px;margin-top:0;}
-.footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;}
+.footer-grid{display:grid;grid-template-columns:1.4fr repeat(2,1fr);gap:40px;}
 footer h5{color:#fff;font-size:12px;letter-spacing:.08em;margin-bottom:16px;text-transform:uppercase;}
 footer li{font-size:13px;margin-bottom:9px;color:#a9c2e0;}
 footer a:hover{color:#fff;}
@@ -325,9 +325,17 @@ footer .foot-logo{color:#fff;font-family:'Manrope',sans-serif;font-weight:800;le
 footer .copy{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-top:20px;font-size:12px;color:#93a9c4;}
 
 @media(max-width:800px){
-  .travel-layout,.init-grid,.awards-grid,.footer-grid,.home-grid{grid-template-columns:1fr;}
+  .travel-layout,.init-grid,.awards-grid,.home-grid{grid-template-columns:1fr;}
+  /* Footer: logo to'liq kenglikda, "Sahifalar" va "Ijtimoiy tarmoqlar" ikki ustunda. */
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px 24px;}
+  .footer-grid > :first-child{grid-column:1 / -1;}
   .container{padding:0 20px;}
   .page-head h1,.hero h1{font-size:27px;}
+  /* Mobil: tashabbus kartalari navy header/footer bandlariga yopishmasligi uchun
+     yuqoridan/pastdan aniq bo'sh joy (margin) qo'shiladi. */
+  .page-body{padding:36px 0 56px;}
+  .init-grid{margin-top:14px;margin-bottom:24px;}
+  .init-sub-grid{margin-bottom:14px;}
   /* Kichik ekranda rasm suzmaydi — matn tepasida to'liq kenglikda turadi. */
   .about-photo-float{float:none;width:100%;max-width:320px;margin:0 auto 20px;}
   .about-bio p{text-align:left;}
