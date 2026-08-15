@@ -17,12 +17,6 @@ export default function AboutTabs({ about, awards, timeline = [] }) {
     return () => window.removeEventListener("hashchange", applyHash);
   }, []);
 
-  const bioSections = [
-    { h: "Ta’lim", t: about?.bio_education },
-    { h: "Kasbiy faoliyat", t: about?.bio_career },
-    { h: "Ijtimoiy va boshqa faoliyat", t: about?.bio_social },
-  ].filter((s) => s.t);
-
   return (
     <>
       <div className="subtabs">
@@ -53,6 +47,17 @@ export default function AboutTabs({ about, awards, timeline = [] }) {
             </p>
           </div>
           <div className="prose about-bio" style={{ maxWidth: 820 }}>
+            <h3>Ta’lim</h3>
+            <p>
+              2024–2026 — Oʻzbekiston Milliy pedagogika universiteti, Psixologiya
+              yoʻnalishi boʻyicha magistr darajasi.
+            </p>
+            <p>
+              2020–2024 — Toshkent davlat pedagogika universiteti, Amaliy
+              psixologiya yoʻnalishi boʻyicha bakalavr darajasi.
+            </p>
+          </div>
+          <div className="prose about-bio" style={{ maxWidth: 820 }}>
             <h3>Ilmiy va jamoatchilik faoliyati</h3>
             <p>
               Otabek Sobitov yoshlar siyosati, siyosiy jarayonlar, huquqiy
@@ -70,39 +75,6 @@ export default function AboutTabs({ about, awards, timeline = [] }) {
               kengaytirishga munosib hissa qoʻshib kelmoqda.
             </p>
           </div>
-          {timeline.length > 0 ? (
-            <div className="tl">
-              {timeline.map((item) => (
-                <div className="tl-item" key={item.id}>
-                  <div className="tl-year">{item.year}</div>
-                  <div className="tl-body">
-                    {item.title && <h4 className="tl-title">{item.title}</h4>}
-                    {String(item.text || "")
-                      .split(/\r?\n+/)
-                      .map((p) => p.trim())
-                      .filter(Boolean)
-                      .map((p, i) => (
-                        <p key={i}>{p}</p>
-                      ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : bioSections.length > 0 ? (
-            <div className="prose" style={{ maxWidth: 760 }}>
-              {bioSections.map((s, i) => (
-                <div key={i}>
-                  <h3>{s.h}</h3>
-                  <p>{s.t}</p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="home-news-empty">
-              Tarjimai hol hali qo‘shilmagan — admin panelidan yillar bo‘yicha
-              bosqichlarni qo‘shing.
-            </p>
-          )}
         </div>
       )}
 
