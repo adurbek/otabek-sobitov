@@ -23,7 +23,8 @@ export default function SmoothScroll() {
     let current = window.scrollY;
     let running = false;
     let rafId = null;
-    const EASE = 0.085; // kichikroq = silliqroq va sekinroq to'xtaydi
+    const EASE = 0.16; // kattaroq = tezroq javob beradi, lekin baribir mayin
+    const STEP = 1.15; // har bir g'ildirak harakati biroz uzoqroq siljitadi
 
     const maxScroll = () =>
       document.documentElement.scrollHeight - window.innerHeight;
@@ -61,7 +62,7 @@ export default function SmoothScroll() {
       if (e.ctrlKey) return; // brauzer zoom
       if (scrollableAncestor(e.target)) return; // ichki skroll — tabiiy qoldiramiz
       e.preventDefault();
-      target = Math.max(0, Math.min(maxScroll(), target + e.deltaY));
+      target = Math.max(0, Math.min(maxScroll(), target + e.deltaY * STEP));
       if (!running) {
         running = true;
         current = window.scrollY;
