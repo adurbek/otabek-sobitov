@@ -458,6 +458,9 @@ footer .copy{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-
 .admin-sidebar nav a:hover{background:rgba(255,255,255,.07);color:#fff;}
 .admin-sidebar nav a.active{background:rgba(255,255,255,.13);color:#fff;font-weight:600;}
 .admin-sidebar nav a.active::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:20px;border-radius:0 3px 3px 0;background:#5aa0ff;}
+/* Yangi xato-xabar kelganda menyuda pulslanuvchi qizil nuqta */
+.admin-sidebar nav a .nav-dot{margin-left:auto;width:9px;height:9px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 0 0 rgba(255,59,59,.6);animation:navDotPulse 1.6s infinite;flex-shrink:0;}
+@keyframes navDotPulse{0%{box-shadow:0 0 0 0 rgba(255,59,59,.6);}70%{box-shadow:0 0 0 7px rgba(255,59,59,0);}100%{box-shadow:0 0 0 0 rgba(255,59,59,0);}}
 .admin-sidebar .logout-btn{margin-top:auto;width:100%;background:rgba(255,255,255,.06);color:#dbe6f5;border:1px solid rgba(255,255,255,.16);padding:11px;font-size:13px;font-weight:600;border-radius:9px;cursor:pointer;transition:background .15s;}
 .admin-sidebar .logout-btn:hover{background:rgba(255,255,255,.14);color:#fff;}
 .admin-main{padding:36px 44px 64px;background:#eef1f6;min-width:0;}
