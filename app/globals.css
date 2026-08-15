@@ -122,7 +122,7 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 .prose ol{margin:8px 0 20px 20px;}
 .prose ol li{font-size:15px;line-height:1.8;color:#37415a;padding:4px 0;}
 
-.awards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.awards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;}
 .award-card{border:1px solid var(--line);padding:24px;background:var(--bg-alt);}
 .award-card .yr{font-size:12px;font-weight:700;color:var(--navy-3);letter-spacing:.06em;}
 .award-card h4{font-size:16px;margin:8px 0 6px;color:var(--ink);font-family:'Manrope',sans-serif;font-weight:700;}
