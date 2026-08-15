@@ -353,6 +353,8 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
   .social-feeds-grid--3{margin-top:22px;}
 }
 @media(max-width:560px){
+  /* Telefonda "So'nggi yangiliklar" bo'limi tepadan bo'sh joy oladi */
+  .home-news{margin-top:28px;}
   /* Telefonda 4 ta ijtimoiy tarmoq kartasi kichikroq va ixcham bo'ladi */
   .social-feeds-grid{grid-template-columns:1fr 1fr;gap:12px;max-width:100%;}
   .social-feeds{padding:36px 14px 50px;}
