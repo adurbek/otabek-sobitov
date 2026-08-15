@@ -141,7 +141,7 @@ export async function GET(request) {
   const SECTIONS = [
     { title: "Mukofotlar", keywords: "mukofot mukofat nishon medal diplom award", href: "/men-haqimda#mukofot" },
     { title: "Tarjimai hol", keywords: "tarjimai hol biografiya bio hayot yoli", href: "/men-haqimda#tarjima" },
-    { title: "Men haqimda", keywords: "maqom shaxsiy profil malumot", href: "/men-haqimda#maqom" },
+    { title: "Men haqimda", keywords: "shaxsiy profil malumot tarjimai hol", href: "/men-haqimda#tarjima" },
     { title: "Mediateka", keywords: "mediateka video videolar lavha youtube", href: "/#mediateka" },
     { title: "Xorijga tashriflar", keywords: "xorij xarita dunyo davlat mamlakat tashrif", href: "/safarlar" },
     { title: "Hududlarga tashriflar", keywords: "hudud viloyat mintaqa xarita tashrif", href: "/safarlar" },
