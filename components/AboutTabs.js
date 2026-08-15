@@ -36,11 +36,40 @@ export default function AboutTabs({ about, awards, timeline = [] }) {
 
       {tab === "tarjima" && (
         <div className="subpanel active">
-          {about?.photo_url && (
-            <figure className="about-photo-float">
-              <img src={about.photo_url} alt={about?.full_name || "Portret"} />
-            </figure>
-          )}
+          <div className="prose about-bio about-intro-block">
+            {about?.photo_url && (
+              <figure className="about-photo-float">
+                <img src={about.photo_url} alt={about?.full_name || "Portret"} />
+              </figure>
+            )}
+            <p>
+              Otabek Sobitov — Oʻzbekiston Respublikasi Oliy Majlisi Qonunchilik
+              palatasi huzuridagi Yoshlar parlamenti Raisi, OʻzLiDeP Siyosiy
+              Kengashi a’zosi hamda amaliy psixologiya yoʻnalishi boʻyicha
+              magistr. U 10 yildan ortiq vaqt davomida yoshlar siyosati,
+              parlament faoliyati, jamoatchilik boshqaruvi va fuqarolik
+              jamiyatini rivojlantirish yoʻnalishlarida samarali faoliyat yuritib
+              kelmoqda.
+            </p>
+          </div>
+          <div className="prose about-bio" style={{ maxWidth: 820 }}>
+            <h3>Ilmiy va jamoatchilik faoliyati</h3>
+            <p>
+              Otabek Sobitov yoshlar siyosati, siyosiy jarayonlar, huquqiy
+              psixologiya, tashkiliy psixologiya hamda qonunchilik
+              yoʻnalishlarida 30 dan ortiq ilmiy maqola va tezislar muallifi
+              hisoblanadi. Shuningdek, “Boshqaruv koʻnikmalari” qoʻllanma, “Yangi
+              Oʻzbekistonda yosh rahbar kadrlarning lavozimga tayinlashining
+              ijtimoiy-psixologik mexanizmlari” ilmiy monografiya muallifi.
+            </p>
+            <p>
+              U respublika miqyosidagi koʻplab loyihalar, forumlar va xalqaro
+              konferensiyalar tashabbuskori hamda tashkilotchisi sifatida
+              faoliyat yuritib, yoshlarning siyosiy faolligini oshirish, parlament
+              diplomatiyasini rivojlantirish va xalqaro hamkorlikni
+              kengaytirishga munosib hissa qoʻshib kelmoqda.
+            </p>
+          </div>
           {timeline.length > 0 ? (
             <div className="tl">
               {timeline.map((item) => (
