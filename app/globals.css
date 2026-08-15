@@ -244,52 +244,38 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
   .video-card.featured{min-height:0;aspect-ratio:16/9;}
 }
 
-/* ===== SOCIAL FEEDS (Instagram / LinkedIn) ===== */
+/* ===== SOCIAL PROFILE CARDS (Instagram / Facebook / Telegram / LinkedIn) ===== */
 .social-feeds{padding:52px 32px 80px;}
-/* minmax(0,1fr): karta ichidagi keng element ustunni kengaytirib, Instagram
-   embedini siqib qo'ymasligi uchun. */
-.social-feeds-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;align-items:start;}
-.feed-col{min-width:0;}
-.feed-title{font-size:18px;color:var(--navy-3);margin-bottom:14px;}
-.feed-frame{border:1px solid var(--line);background:#fff;overflow:hidden;height:540px;}
-.feed-frame iframe{width:100%;height:100%;border:none;display:block;}
-.feed-link{display:inline-block;margin-top:12px;font-size:13px;font-weight:600;color:var(--navy-3);}
-.feed-link:hover{color:var(--navy);}
-/* Rasmiy embed plaginlari uslubidagi karta: profil sarlavhasi + scroll lenta */
-.feed-embed{--brand:#1877f2;border:1px solid #dddfe2;border-radius:3px;background:#fff;height:540px;display:flex;flex-direction:column;overflow:hidden;font-family:'Inter',Helvetica,Arial,sans-serif;}
-.feed-embed.brand-facebook{--brand:#1877f2;}
-.feed-embed.brand-telegram{--brand:#229ed9;}
-.feed-embed.brand-linkedin{--brand:#0a66c2;}
-.feed-embed.brand-instagram{--brand:#e1306c;}
-.feed-head{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-bottom:1px solid #dddfe2;}
-.feed-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1px solid #dddfe2;background:#fff;}
-.feed-avatar-fallback{display:flex;align-items:center;justify-content:center;color:#fff;background:var(--brand);border-color:transparent;}
-.feed-avatar-fallback svg{width:24px;height:24px;}
-.feed-head-text{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;}
-.feed-head-name{display:flex;align-items:center;gap:5px;font-size:14px;font-weight:600;color:#385898;line-height:1.2;min-width:0;}
-.feed-head-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.feed-verified{width:14px;height:14px;color:var(--brand);flex-shrink:0;}
-.feed-verified svg{width:100%;height:100%;display:block;}
-.feed-count{font-size:11px;color:#616770;}
-.feed-follow{display:inline-flex;align-items:center;gap:5px;flex-shrink:0;align-self:center;white-space:nowrap;background:#e4e6eb;color:#050505;font-size:12px;font-weight:600;padding:5px 9px;border-radius:3px;line-height:1;}
-.feed-follow:hover{background:#d8dade;}
-.feed-follow-icon{width:13px;height:13px;color:var(--brand);}
-.feed-follow-icon svg{width:100%;height:100%;display:block;}
-.feed-scroll{flex:1;overflow-y:auto;background:#f0f2f5;padding:8px;display:flex;flex-direction:column;gap:8px;}
-.feed-post{display:block;background:#fff;border:1px solid #dddfe2;border-radius:3px;overflow:hidden;}
-a.feed-post:hover{border-color:var(--brand);}
-.feed-post-head{display:flex;align-items:center;gap:8px;padding:10px 12px 8px;}
-.feed-post-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;flex-shrink:0;}
-.feed-post-meta{display:flex;flex-direction:column;min-width:0;flex:1;}
-.feed-post-meta b{font-size:12.5px;font-weight:600;color:#050505;line-height:1.3;}
-.feed-post-meta span{font-size:11px;color:#616770;}
-.feed-post-brand{width:18px;height:18px;color:var(--brand);flex-shrink:0;}
-.feed-post-brand svg{width:100%;height:100%;display:block;}
-.feed-post p{font-size:13px;color:#050505;line-height:1.5;padding:0 12px 10px;white-space:pre-line;}
-.feed-post-img{width:100%;display:block;object-fit:cover;max-height:230px;}
-.feed-empty{font-size:12.5px;color:#616770;line-height:1.7;padding:10px 6px;}
+.social-feeds-title{font-size:24px;color:var(--navy);text-align:center;margin-bottom:34px;font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:.01em;}
+.social-feeds-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;align-items:stretch;}
+.soc-card{--brand:#1877f2;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(11,42,74,.06);transition:transform .2s,box-shadow .2s;}
+.soc-card:hover{transform:translateY(-5px);box-shadow:0 14px 30px rgba(11,42,74,.14);}
+.soc-card.brand-facebook{--brand:#1877f2;}
+.soc-card.brand-telegram{--brand:#229ed9;}
+.soc-card.brand-linkedin{--brand:#0a66c2;}
+.soc-card.brand-instagram{--brand:#d62976;}
+.soc-cover{height:78px;background:var(--brand);display:flex;align-items:center;gap:8px;padding:0 18px;color:#fff;position:relative;overflow:hidden;}
+.soc-card.brand-instagram .soc-cover{background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);}
+.soc-cover-net{display:inline-flex;align-items:center;gap:8px;font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;z-index:1;}
+.soc-cover-net svg{width:20px;height:20px;fill:currentColor;}
+.soc-cover-watermark{position:absolute;right:8px;bottom:-18px;width:86px;height:86px;opacity:.18;color:#fff;pointer-events:none;}
+.soc-cover-watermark svg{width:100%;height:100%;fill:currentColor;}
+.soc-body{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 18px 22px;}
+.soc-avatar{width:78px;height:78px;border-radius:50%;object-fit:cover;border:4px solid #fff;background:#fff;margin-top:-39px;box-shadow:0 2px 10px rgba(0,0,0,.14);}
+.soc-avatar-fallback{display:flex;align-items:center;justify-content:center;color:#fff;background:var(--brand);}
+.soc-card.brand-instagram .soc-avatar-fallback{background:linear-gradient(45deg,#fa7e1e,#d62976,#962fbf);}
+.soc-avatar-fallback svg{width:36px;height:36px;fill:currentColor;}
+.soc-name{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:13px;font-family:'Manrope',sans-serif;font-weight:700;font-size:16px;color:var(--navy);line-height:1.2;}
+.soc-verified{width:15px;height:15px;color:var(--brand);flex-shrink:0;}
+.soc-verified svg{width:100%;height:100%;display:block;fill:currentColor;}
+.soc-handle{font-size:13px;color:var(--muted);margin-top:4px;word-break:break-word;}
+.soc-followers{font-size:13.5px;color:var(--navy-3);font-weight:600;margin-top:12px;}
+.soc-btn{margin-top:auto;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--brand);color:#fff;font-size:13.5px;font-weight:700;padding:11px 14px;border-radius:10px;line-height:1;margin-top:18px;transition:filter .15s;}
+.soc-card.brand-instagram .soc-btn{background:linear-gradient(45deg,#fa7e1e,#d62976,#962fbf);}
+.soc-btn:hover{filter:brightness(1.08);color:#fff;}
+.soc-btn svg{width:16px;height:16px;fill:currentColor;}
 @media(max-width:1100px){ .social-feeds-grid{grid-template-columns:1fr 1fr;} }
-@media(max-width:640px){ .social-feeds-grid{grid-template-columns:1fr;} .social-feeds{padding:44px 20px 60px;} .feed-frame{height:auto;min-height:0;} .feed-embed{height:460px;} .feed-frame iframe{height:480px;} }
+@media(max-width:560px){ .social-feeds-grid{grid-template-columns:1fr 1fr;gap:14px;} .social-feeds{padding:44px 18px 60px;} .soc-cover{height:64px;padding:0 12px;} .soc-cover-net{font-size:12px;} .soc-name{font-size:14px;} .soc-btn{font-size:12px;padding:9px 8px;} }
 
 /* ===== NEWS DETAIL (article) ===== */
 .article-wrap{background:var(--bg-alt);padding:36px 20px 70px;}

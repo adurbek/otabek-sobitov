@@ -1,11 +1,12 @@
-// Instagram lentasi rasmiy embed orqali keladi. Facebook, Telegram va LinkedIn
-// ochiq embed bermaydi (shaxsiy profil / kanal emas / umuman API yo'q), shuning
-// uchun ular admin panelidan kiritilgan postlardan yig'iladi.
+// Bosh sahifadagi ijtimoiy tarmoq bo'limi: har bir tarmoq o'z brend rangida
+// profil kartasi ko'rinishida (rasm, ism, tasdiq belgisi, obunachilar, tugma).
+// Barcha havolalar Otabek Sobitovning rasmiy akkauntlariga ulanadi. Ma'lumot
+// admin paneldagi «Ijtimoiy tarmoqlar» bo'limidan (social_profiles) olinadi.
 const NETWORKS = [
-  { key: "instagram", title: "Instagram", linkLabel: "Instagram sahifasini ochish ↗" },
-  { key: "facebook", title: "Facebook", linkLabel: "Facebook sahifasini ochish ↗" },
-  { key: "telegram", title: "Telegram", linkLabel: "Telegram sahifasini ochish ↗" },
-  { key: "linkedin", title: "LinkedIn", linkLabel: "LinkedIn profilini ochish ↗" },
+  { key: "instagram", title: "Instagram", btnLabel: "Profilni ochish" },
+  { key: "facebook", title: "Facebook", btnLabel: "Sahifani ochish" },
+  { key: "telegram", title: "Telegram", btnLabel: "Kanalni ochish" },
+  { key: "linkedin", title: "LinkedIn", btnLabel: "Profilni ochish" },
 ];
 
 const ICONS = {
@@ -31,130 +32,74 @@ const ICONS = {
   ),
 };
 
-function FeedColumn({ network, profile, posts }) {
-  const url = profile?.profile_url || "";
-  // Facebook Sahifasi (Page) havolasi kiritilgan bo'lsa, rasmiy plagin orqali
-  // jonli lenta ko'rsatiladi (shaxsiy profillar uchun Facebook buni bermaydi).
-  const pageUrl = network.key === "facebook" ? profile?.page_url : "";
-  const name = profile?.display_name || "Otabek Sobitov";
-  if (pageUrl) {
-    return (
-      <div className="feed-col">
-        <h3 className="feed-title">{network.title}</h3>
-        <div className="feed-frame">
-          <iframe
-            src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
-              pageUrl
-            )}&tabs=timeline&width=380&height=540&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false`}
-            title="Facebook sahifasi"
-            loading="lazy"
-            allow="encrypted-media"
-          />
-        </div>
-        <a className="feed-link" href={pageUrl} target="_blank" rel="noopener noreferrer">
-          {network.linkLabel}
-        </a>
-      </div>
-    );
-  }
-  return (
-    <div className="feed-col">
-      <h3 className="feed-title">{network.title}</h3>
-      <div className={`feed-embed brand-${network.key}`}>
-        {/* Sarlavha: rasmiy plagin uslubida — avatar, ism, tasdiq belgisi, kuzatish tugmasi */}
-        <div className="feed-head">
-          {profile?.avatar_url ? (
-            <img className="feed-avatar" src={profile.avatar_url} alt={name} />
-          ) : (
-            <span className="feed-avatar feed-avatar-fallback">{ICONS[network.key]}</span>
-          )}
-          <span className="feed-head-text">
-            <span className="feed-head-name">
-              <span className="feed-head-label">{name}</span>
-              <span className="feed-verified" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2.2 14.1 4l2.7-.3 1 2.5 2.5 1-.3 2.7 1.8 2.1-1.8 2.1.3 2.7-2.5 1-1 2.5-2.7-.3L12 21.8 9.9 20l-2.7.3-1-2.5-2.5-1 .3-2.7L2.2 12 4 9.9l-.3-2.7 2.5-1 1-2.5 2.7.3L12 2.2Zm-1.2 12.9 5-5-1.4-1.4-3.6 3.6-1.6-1.6-1.4 1.4 3 3Z" />
-                </svg>
-              </span>
-            </span>
-            {profile?.followers && <span className="feed-count">{profile.followers}</span>}
-          </span>
-          {url && (
-            <a className="feed-follow" href={url} target="_blank" rel="noopener noreferrer">
-              <span className="feed-follow-icon">{ICONS[network.key]}</span>
-              Kuzatish
-            </a>
-          )}
-        </div>
+const VERIFIED = (
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2.2 14.1 4l2.7-.3 1 2.5 2.5 1-.3 2.7 1.8 2.1-1.8 2.1.3 2.7-2.5 1-1 2.5-2.7-.3L12 21.8 9.9 20l-2.7.3-1-2.5-2.5-1 .3-2.7L2.2 12 4 9.9l-.3-2.7 2.5-1 1-2.5 2.7.3L12 2.2Zm-1.2 12.9 5-5-1.4-1.4-3.6 3.6-1.6-1.6-1.4 1.4 3 3Z" />
+  </svg>
+);
 
-        <div className="feed-scroll">
-          {posts.length === 0 && (
-            <p className="feed-empty">
-              Hozircha post qo&rsquo;shilmagan. Admin panelidagi &laquo;Ijtimoiy
-              tarmoqlar&raquo; bo&rsquo;limidan qo&rsquo;shishingiz mumkin.
-            </p>
-          )}
-          {posts.map((p) => {
-            const inner = (
-              <>
-                <span className="feed-post-head">
-                  {profile?.avatar_url ? (
-                    <img className="feed-post-avatar" src={profile.avatar_url} alt="" />
-                  ) : (
-                    <span className="feed-post-avatar feed-avatar-fallback">
-                      {ICONS[network.key]}
-                    </span>
-                  )}
-                  <span className="feed-post-meta">
-                    <b>{name}</b>
-                    {p.date && <span>{p.date}</span>}
-                  </span>
-                  <span className="feed-post-brand">{ICONS[network.key]}</span>
-                </span>
-                {p.body && <p>{p.body}</p>}
-                {p.image_url && <img className="feed-post-img" src={p.image_url} alt="" />}
-              </>
-            );
-            return p.link_url ? (
-              <a
-                className="feed-post"
-                key={p.id}
-                href={p.link_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {inner}
-              </a>
-            ) : (
-              <div className="feed-post" key={p.id}>
-                {inner}
-              </div>
-            );
-          })}
-        </div>
+function ProfileCard({ network, profile }) {
+  const url = profile?.profile_url || "";
+  // Facebook uchun Sahifa (Page) havolasi kiritilgan bo'lsa, undan foydalanamiz.
+  const href =
+    (network.key === "facebook" && profile?.page_url) || url || "#";
+  const name = profile?.display_name || "Otabek Sobitov";
+  const handle = profile?.handle || "";
+  const followers = profile?.followers || "";
+  const icon = ICONS[network.key];
+
+  return (
+    <div className={`soc-card brand-${network.key}`}>
+      <div className="soc-cover">
+        <span className="soc-cover-net">
+          {icon}
+          {network.title}
+        </span>
+        <span className="soc-cover-watermark" aria-hidden="true">
+          {icon}
+        </span>
       </div>
-      {url && (
-        <a className="feed-link" href={url} target="_blank" rel="noopener noreferrer">
-          {network.linkLabel}
+      <div className="soc-body">
+        {profile?.avatar_url ? (
+          <img className="soc-avatar" src={profile.avatar_url} alt={name} />
+        ) : (
+          <span className="soc-avatar soc-avatar-fallback">{icon}</span>
+        )}
+        <span className="soc-name">
+          <span className="soc-name-text">{name}</span>
+          <span className="soc-verified" aria-hidden="true">
+            {VERIFIED}
+          </span>
+        </span>
+        {handle && <span className="soc-handle">{handle}</span>}
+        {followers && <span className="soc-followers">{followers}</span>}
+        <a
+          className="soc-btn"
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {icon}
+          {network.btnLabel}
         </a>
-      )}
+      </div>
     </div>
   );
 }
 
-export default function SocialFeeds({ profiles = [], posts = [] }) {
+export default function SocialFeeds({ profiles = [] }) {
   const profileByNetwork = {};
   for (const p of profiles) profileByNetwork[p.network] = p;
 
   return (
     <section className="container social-feeds">
+      <h2 className="social-feeds-title">Ijtimoiy tarmoqlarda kuzating</h2>
       <div className="social-feeds-grid">
         {NETWORKS.map((n) => (
-          <FeedColumn
+          <ProfileCard
             key={n.key}
             network={n}
             profile={profileByNetwork[n.key]}
-            posts={posts.filter((p) => p.network === n.key)}
           />
         ))}
       </div>
