@@ -213,29 +213,32 @@ function InstagramCard({ profile, posts }) {
             <span className="ig-avatar ig-avatar-fallback">{icon}</span>
           )}
         </a>
-        <div className="ig-stats">
-          <div className="ig-stat">
-            <b>{postsCount}</b>
-            <span>posts</span>
+        <div className="ig-identity">
+          <div className="ig-name">
+            <span className="ig-name-text">{name}</span>
+            <span className="ig-verified" aria-hidden="true">
+              {VERIFIED}
+            </span>
           </div>
-          <div className="ig-stat">
-            <b>{followers}</b>
-            <span>followers</span>
-          </div>
-          <div className="ig-stat">
-            <b>{following}</b>
-            <span>following</span>
-          </div>
+          {handle && <div className="ig-handle">{handle}</div>}
         </div>
       </div>
 
-      <div className="ig-name">
-        {name}
-        <span className="ig-verified" aria-hidden="true">
-          {VERIFIED}
-        </span>
+      <div className="ig-stats">
+        <div className="ig-stat">
+          <b>{postsCount}</b>
+          <span>posts</span>
+        </div>
+        <div className="ig-stat">
+          <b>{followers}</b>
+          <span>followers</span>
+        </div>
+        <div className="ig-stat">
+          <b>{following}</b>
+          <span>following</span>
+        </div>
       </div>
-      {handle && <div className="ig-handle">{handle}</div>}
+
       {bio && <div className="ig-bio">{bio}</div>}
 
       <a className="ig-btn" href={url} target="_blank" rel="noopener noreferrer">

@@ -295,19 +295,22 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 .ig-card{display:flex;flex-direction:column;background:#000;color:#fff;border:1px solid #262626;border-radius:18px;overflow:hidden;padding:18px 16px 16px;box-shadow:0 2px 10px rgba(11,42,74,.06);transition:transform .2s,box-shadow .2s;}
 .ig-card:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(0,0,0,.25);}
 .ig-head{display:flex;align-items:center;gap:16px;}
-.ig-avatar-ring{flex-shrink:0;width:88px;height:88px;border-radius:50%;padding:3px;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);display:block;}
+.ig-avatar-ring{flex-shrink:0;width:84px;height:84px;border-radius:50%;padding:3px;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);display:block;}
 .ig-avatar{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #000;background:#000;display:block;}
 .ig-avatar-fallback{display:flex;align-items:center;justify-content:center;color:#fff;background:#000;}
-.ig-avatar-fallback svg{width:38px;height:38px;fill:currentColor;}
-.ig-stats{flex:1;display:flex;justify-content:space-around;text-align:center;}
-.ig-stat{display:flex;flex-direction:column;gap:2px;}
-.ig-stat b{font-size:22px;font-weight:700;color:#fff;line-height:1.15;}
-.ig-stat span{font-size:14px;color:#b3b3b3;}
-.ig-name{display:flex;align-items:center;gap:5px;margin-top:16px;font-family:'Manrope',sans-serif;font-weight:700;font-size:17px;color:#fff;}
+.ig-avatar-fallback svg{width:36px;height:36px;fill:currentColor;}
+.ig-identity{flex:1;min-width:0;text-align:left;}
+.ig-name{display:flex;align-items:center;gap:5px;font-family:'Manrope',sans-serif;font-weight:700;font-size:17px;color:#fff;line-height:1.2;}
+.ig-name-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .ig-verified{width:15px;height:15px;color:#3897f0;flex-shrink:0;}
 .ig-verified svg{width:100%;height:100%;display:block;fill:currentColor;}
-.ig-handle{font-size:13px;color:#b3b3b3;margin-top:2px;word-break:break-word;}
-.ig-bio{font-size:13px;color:#e8e8e8;line-height:1.5;margin-top:6px;white-space:pre-line;}
+.ig-handle{font-size:13px;color:#b3b3b3;margin-top:3px;word-break:break-word;line-height:1.3;}
+/* Statistika to'liq kenglikda, uch teng ustunda — yozuvlar bir-biriga yopishmaydi */
+.ig-stats{display:flex;width:100%;margin-top:16px;padding:13px 0;border-top:1px solid #262626;border-bottom:1px solid #262626;}
+.ig-stat{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.ig-stat b{font-size:20px;font-weight:700;color:#fff;line-height:1.15;}
+.ig-stat span{font-size:13px;color:#b3b3b3;}
+.ig-bio{font-size:13px;color:#e8e8e8;line-height:1.5;margin-top:12px;white-space:pre-line;}
 .ig-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:14px;background:linear-gradient(45deg,#fa7e1e,#d62976,#962fbf);color:#fff;font-size:14px;font-weight:700;padding:10px 14px;border-radius:9px;line-height:1;transition:filter .15s;}
 .ig-btn:hover{filter:brightness(1.08);color:#fff;}
 .ig-btn svg{width:17px;height:17px;fill:currentColor;}
@@ -330,10 +333,10 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
   .soc-embed iframe{height:600px;}
   /* Instagram kartasi — telefonda katta */
   .ig-card{padding:22px 20px 20px;}
-  .ig-avatar-ring{width:112px;height:112px;}
-  .ig-stat b{font-size:26px;}
-  .ig-stat span{font-size:16px;}
-  .ig-name{font-size:20px;margin-top:20px;}
+  .ig-avatar-ring{width:104px;height:104px;}
+  .ig-stat b{font-size:24px;}
+  .ig-stat span{font-size:15px;}
+  .ig-name{font-size:20px;}
   .ig-handle{font-size:15px;}
   .ig-bio{font-size:15px;}
   .ig-btn{font-size:16px;padding:13px 16px;}
