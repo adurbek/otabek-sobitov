@@ -62,7 +62,9 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 /* ===== DRAWER (burger menu) ===== */
 .drawer-overlay{position:fixed;inset:0;background:rgba(8,20,40,.5);opacity:0;pointer-events:none;transition:opacity .25s;z-index:200;}
 .drawer-overlay.show{opacity:1;pointer-events:auto;}
-.drawer{position:fixed;top:0;left:0;bottom:0;width:330px;max-width:86vw;background:var(--navy-2);color:#fff;z-index:201;transform:translateX(-100%);transition:transform .28s ease;padding:24px 28px 40px;overflow-y:auto;}
+.drawer{position:fixed;top:0;left:0;bottom:0;width:330px;max-width:86vw;background:var(--navy-2);color:#fff;z-index:201;transform:translateX(-100%);transition:transform .28s ease;padding:24px 28px 40px;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none;}
+/* Menyu ichida skroll ishlaydi, lekin skrollbar chizig'i ko'rinmaydi */
+.drawer::-webkit-scrollbar{width:0;height:0;display:none;}
 .drawer.open{transform:none;}
 .drawer-close{background:none;border:none;color:#c7d6e8;cursor:pointer;display:block;margin-left:auto;padding:4px;}
 .drawer-close:hover{color:#fff;}
