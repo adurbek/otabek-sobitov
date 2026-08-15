@@ -185,22 +185,25 @@ function ProfileCard({ network, profile, posts }) {
   );
 }
 
-// Instagram kartasi — haqiqiy Instagram profili ko'rinishida (qorong'i fon,
-// gradient halqali avatar, post/followers/following statistikasi, bio, post to'ri).
+// Instagram kartasi — Instagram desktop profil ko'rinishida: avatar chapda katta,
+// o'ngda username, bir qatorli statistika (post/followers/following), ism/bio va
+// pastda post to'ri.
 function InstagramCard({ profile, posts }) {
   const name = profile?.display_name || "Otabek Sobitov";
   const handle = profile?.handle || "";
+  // Desktop IG'da tepada username (@'siz) turadi.
+  const username = handle.replace(/^@/, "");
   const url = profile?.profile_url || "https://www.instagram.com/";
   const followers = profile?.followers || "0";
   const following = profile?.following || "0";
   const bio = profile?.bio || "";
   const icon = ICONS.instagram;
   const postsCount = posts.length;
-  const gridPosts = posts.slice(0, 9);
+  const gridPosts = posts.slice(0, 6);
 
   return (
     <div className="ig-card">
-      <div className="ig-head">
+      <div className="ig-main">
         <a
           className="ig-avatar-ring"
           href={url}
@@ -213,38 +216,41 @@ function InstagramCard({ profile, posts }) {
             <span className="ig-avatar ig-avatar-fallback">{icon}</span>
           )}
         </a>
-        <div className="ig-identity">
-          <div className="ig-name">
-            <span className="ig-name-text">{name}</span>
+
+        <div className="ig-info">
+          <div className="ig-toprow">
+            <span className="ig-username">{username || name}</span>
             <span className="ig-verified" aria-hidden="true">
               {VERIFIED}
             </span>
           </div>
-          {handle && <div className="ig-handle">{handle}</div>}
+
+          <div className="ig-stats-inline">
+            <span>
+              <b>{postsCount}</b> posts
+            </span>
+            <span>
+              <b>{followers}</b> followers
+            </span>
+            <span>
+              <b>{following}</b> following
+            </span>
+          </div>
+
+          <div className="ig-displayname">{name}</div>
+          {bio && <div className="ig-bio">{bio}</div>}
+
+          <a
+            className="ig-btn"
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {icon}
+            Profilni ochish
+          </a>
         </div>
       </div>
-
-      <div className="ig-stats">
-        <div className="ig-stat">
-          <b>{postsCount}</b>
-          <span>posts</span>
-        </div>
-        <div className="ig-stat">
-          <b>{followers}</b>
-          <span>followers</span>
-        </div>
-        <div className="ig-stat">
-          <b>{following}</b>
-          <span>following</span>
-        </div>
-      </div>
-
-      {bio && <div className="ig-bio">{bio}</div>}
-
-      <a className="ig-btn" href={url} target="_blank" rel="noopener noreferrer">
-        {icon}
-        Profilni ochish
-      </a>
 
       {gridPosts.length > 0 && (
         <div className="ig-grid">
@@ -260,27 +266,26 @@ function InstagramCard({ profile, posts }) {
 export default function SocialFeeds({ profiles = [], posts = [] }) {
   const profileByNetwork = {};
   for (const p of profiles) profileByNetwork[p.network] = p;
+  const others = NETWORKS.filter((n) => n.key !== "instagram");
 
   return (
     <section className="container social-feeds">
       <h2 className="social-feeds-title">Ijtimoiy tarmoqlarda kuzating</h2>
-      <div className="social-feeds-grid">
-        {NETWORKS.map((n) =>
-          n.key === "instagram" ? (
-            <InstagramCard
-              key={n.key}
-              profile={profileByNetwork[n.key]}
-              posts={posts.filter((p) => p.network === n.key)}
-            />
-          ) : (
-            <ProfileCard
-              key={n.key}
-              network={n}
-              profile={profileByNetwork[n.key]}
-              posts={posts.filter((p) => p.network === n.key)}
-            />
-          )
-        )}
+
+      <InstagramCard
+        profile={profileByNetwork.instagram}
+        posts={posts.filter((p) => p.network === "instagram")}
+      />
+
+      <div className="social-feeds-grid social-feeds-grid--3">
+        {others.map((n) => (
+          <ProfileCard
+            key={n.key}
+            network={n}
+            profile={profileByNetwork[n.key]}
+            posts={posts.filter((p) => p.network === n.key)}
+          />
+        ))}
       </div>
     </section>
   );
