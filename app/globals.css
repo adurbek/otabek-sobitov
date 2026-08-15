@@ -174,7 +174,7 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 .hero-slider{position:relative;height:min(74vh,620px);min-height:380px;background:var(--navy);overflow:hidden;}
 .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;pointer-events:none;}
 .hero-slide.active{opacity:1;pointer-events:auto;}
-.hero-slide img{width:100%;height:100%;object-fit:cover;}
+.hero-slide img{width:100%;height:100%;object-fit:cover;object-position:center 38%;}
 .hero-slide-placeholder{position:absolute;inset:0;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-3) 100%);}
 .hero-slide-placeholder::after{content:"";position:absolute;right:-100px;top:-100px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.05);}
 .hero-slide-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,15,32,.72) 0%,rgba(5,15,32,.18) 34%,rgba(5,15,32,0) 55%);}
