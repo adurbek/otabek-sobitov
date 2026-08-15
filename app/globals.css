@@ -357,7 +357,7 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
   .home-news{margin-top:28px;}
   /* Telefonda 4 ta ijtimoiy tarmoq kartasi kichikroq va ixcham bo'ladi */
   .social-feeds-grid{grid-template-columns:1fr 1fr;gap:12px;max-width:100%;}
-  .social-feeds{padding:36px 14px 50px;}
+  .social-feeds{padding:36px 14px 50px;margin-bottom:40px;}
   .social-feeds-title{font-size:22px;margin-bottom:26px;}
   /* Instagram karta ham to'liq kenglikda */
   .ig-card{max-width:100%;}
