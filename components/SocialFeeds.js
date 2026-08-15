@@ -185,6 +185,75 @@ function ProfileCard({ network, profile, posts }) {
   );
 }
 
+// Instagram kartasi — haqiqiy Instagram profili ko'rinishida (qorong'i fon,
+// gradient halqali avatar, post/followers/following statistikasi, bio, post to'ri).
+function InstagramCard({ profile, posts }) {
+  const name = profile?.display_name || "Otabek Sobitov";
+  const handle = profile?.handle || "";
+  const url = profile?.profile_url || "https://www.instagram.com/";
+  const followers = profile?.followers || "0";
+  const following = profile?.following || "0";
+  const bio = profile?.bio || "";
+  const icon = ICONS.instagram;
+  const postsCount = posts.length;
+  const gridPosts = posts.slice(0, 9);
+
+  return (
+    <div className="ig-card">
+      <div className="ig-head">
+        <a
+          className="ig-avatar-ring"
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {profile?.avatar_url ? (
+            <img className="ig-avatar" src={profile.avatar_url} alt={name} />
+          ) : (
+            <span className="ig-avatar ig-avatar-fallback">{icon}</span>
+          )}
+        </a>
+        <div className="ig-stats">
+          <div className="ig-stat">
+            <b>{postsCount}</b>
+            <span>posts</span>
+          </div>
+          <div className="ig-stat">
+            <b>{followers}</b>
+            <span>followers</span>
+          </div>
+          <div className="ig-stat">
+            <b>{following}</b>
+            <span>following</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="ig-name">
+        {name}
+        <span className="ig-verified" aria-hidden="true">
+          {VERIFIED}
+        </span>
+      </div>
+      {handle && <div className="ig-handle">{handle}</div>}
+      {bio && <div className="ig-bio">{bio}</div>}
+
+      <a className="ig-btn" href={url} target="_blank" rel="noopener noreferrer">
+        {icon}
+        Profilni ochish
+      </a>
+
+      {gridPosts.length > 0 && (
+        <div className="ig-grid">
+          {gridPosts.map((p) => (
+            <PostTile key={p.id} post={p} icon={icon} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function SocialFeeds({ profiles = [], posts = [] }) {
   const profileByNetwork = {};
   for (const p of profiles) profileByNetwork[p.network] = p;
@@ -193,14 +262,22 @@ export default function SocialFeeds({ profiles = [], posts = [] }) {
     <section className="container social-feeds">
       <h2 className="social-feeds-title">Ijtimoiy tarmoqlarda kuzating</h2>
       <div className="social-feeds-grid">
-        {NETWORKS.map((n) => (
-          <ProfileCard
-            key={n.key}
-            network={n}
-            profile={profileByNetwork[n.key]}
-            posts={posts.filter((p) => p.network === n.key)}
-          />
-        ))}
+        {NETWORKS.map((n) =>
+          n.key === "instagram" ? (
+            <InstagramCard
+              key={n.key}
+              profile={profileByNetwork[n.key]}
+              posts={posts.filter((p) => p.network === n.key)}
+            />
+          ) : (
+            <ProfileCard
+              key={n.key}
+              network={n}
+              profile={profileByNetwork[n.key]}
+              posts={posts.filter((p) => p.network === n.key)}
+            />
+          )
+        )}
       </div>
     </section>
   );

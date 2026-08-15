@@ -28,7 +28,7 @@ export default function AdminSocialPage() {
       const map = {};
       for (const p of profileList) map[p.network] = p;
       for (const n of NETWORKS) {
-        if (!map[n.key]) map[n.key] = { network: n.key, display_name: "", handle: "", avatar_url: "", followers: "", profile_url: "", page_url: "" };
+        if (!map[n.key]) map[n.key] = { network: n.key, display_name: "", handle: "", avatar_url: "", followers: "", following: "", bio: "", profile_url: "", page_url: "" };
       }
       setProfiles(map);
       setPosts(postList);
@@ -128,13 +128,38 @@ export default function AdminSocialPage() {
             />
           </div>
           <div className="field">
-            <label>Obunachilar (ixtiyoriy)</label>
+            <label>Obunachilar / followers (ixtiyoriy)</label>
             <input
               value={profiles[n.key].followers || ""}
               onChange={(e) => updateProfile(n.key, "followers", e.target.value)}
-              placeholder="masalan: 3,808 obunachi"
+              placeholder="masalan: 305"
             />
           </div>
+          {n.key === "instagram" && (
+            <>
+              <div className="field">
+                <label>Following (kuzatilayotganlar soni) — Instagram</label>
+                <input
+                  value={profiles[n.key].following || ""}
+                  onChange={(e) => updateProfile(n.key, "following", e.target.value)}
+                  placeholder="masalan: 124"
+                />
+              </div>
+              <div className="field">
+                <label>Bio (tavsif) — Instagram</label>
+                <textarea
+                  value={profiles[n.key].bio || ""}
+                  onChange={(e) => updateProfile(n.key, "bio", e.target.value)}
+                  placeholder={"Digital creator\nO'ZLIDEP - Yoshlar parlamenti"}
+                  rows={3}
+                />
+                <div className="field-hint">
+                  Har bir qatordan yangi satrda yoziladi. &laquo;post&raquo; soni
+                  avtomatik &mdash; qo&rsquo;shilgan Instagram postlari soniga qarab.
+                </div>
+              </div>
+            </>
+          )}
           <div className="field">
             <label>Profil havolasi</label>
             <input
