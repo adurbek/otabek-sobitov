@@ -411,7 +411,8 @@ footer .copy{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-
   .page-head h1,.hero h1{font-size:27px;}
   /* Mobil: tashabbus kartalari navy header/footer bandlariga yopishmasligi uchun
      yuqoridan/pastdan aniq bo'sh joy (margin) qo'shiladi. */
-  .page-body{padding:36px 0 56px;}
+  /* Yon padding (20px) saqlanadi — matn ekran chetlariga yopishmasin. */
+  .page-body{padding:36px 20px 56px;}
   .init-grid{margin-top:14px;margin-bottom:24px;}
   .init-sub-grid{margin-bottom:14px;}
   /* Kichik ekranda rasm suzmaydi — markazda, matn tepasida to'liq kenglikda turadi. */
