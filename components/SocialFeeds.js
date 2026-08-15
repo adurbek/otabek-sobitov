@@ -185,152 +185,24 @@ function ProfileCard({ network, profile, posts }) {
   );
 }
 
-// Instagram kartasi — Instagram telefon profili ko'rinishida: avatar chapda,
-// yonida ustma-ust statistika (posts/followers/following), pastda ism, bio,
-// tugma va 3 ustunli post to'ri. Karta telefon eniga o'xshab markazda turadi.
-function InstagramCard({ profile, posts }) {
-  const name = profile?.display_name || "Otabek Sobitov";
-  const url = profile?.profile_url || "https://www.instagram.com/";
-  const followers = profile?.followers || "0";
-  const following = profile?.following || "0";
-  const bio = profile?.bio || "";
-  const icon = ICONS.instagram;
-  // Post soni: admin qo'lda kiritsa o'sha, aks holda qo'shilgan postlar soni.
-  const postsCount = profile?.posts_count || String(posts.length);
-  const gridPosts = posts.slice(0, 9);
-
-  return (
-    <div className="ig-card">
-      <div className="ig-head">
-        <a
-          className="ig-avatar-ring"
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {profile?.avatar_url ? (
-            <img className="ig-avatar" src={profile.avatar_url} alt={name} />
-          ) : (
-            <span className="ig-avatar ig-avatar-fallback">{icon}</span>
-          )}
-        </a>
-        <div className="ig-stats">
-          <div className="ig-stat">
-            <b>{postsCount}</b>
-            <span>posts</span>
-          </div>
-          <div className="ig-stat">
-            <b>{followers}</b>
-            <span>followers</span>
-          </div>
-          <div className="ig-stat">
-            <b>{following}</b>
-            <span>following</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="ig-name">
-        <span className="ig-name-text">{name}</span>
-        <span className="ig-verified" aria-hidden="true">
-          {VERIFIED}
-        </span>
-      </div>
-      {bio && <div className="ig-bio">{bio}</div>}
-
-      <a className="ig-btn" href={url} target="_blank" rel="noopener noreferrer">
-        {icon}
-        Profilni ochish
-      </a>
-
-      {gridPosts.length > 0 && (
-        <div className="ig-grid">
-          {gridPosts.map((p) => (
-            <PostTile key={p.id} post={p} icon={icon} />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-// LinkedIn kartasi — haqiqiy LinkedIn profil ko'rinishida: qora banner, avatar
-// bannerga tushib turadi, ism, headline (lavozim), joylashuv, connections va tugma.
-function LinkedInCard({ profile }) {
-  const name = profile?.display_name || "Otabek Sobitov";
-  const url = profile?.profile_url || "https://www.linkedin.com/";
-  const headline = profile?.bio || "";
-  const location = profile?.location || "";
-  const connections = profile?.followers || "";
-  const icon = ICONS.linkedin;
-
-  return (
-    <div className="li-card">
-      <div className="li-cover">
-        <span className="li-cover-watermark" aria-hidden="true">
-          {icon}
-        </span>
-      </div>
-      <div className="li-body">
-        <a
-          className="li-avatar-wrap"
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {profile?.avatar_url ? (
-            <img className="li-avatar" src={profile.avatar_url} alt={name} />
-          ) : (
-            <span className="li-avatar li-avatar-fallback">{icon}</span>
-          )}
-        </a>
-        <div className="li-name">
-          <span className="li-name-text">{name}</span>
-          <span className="li-verified" aria-hidden="true">
-            {VERIFIED}
-          </span>
-        </div>
-        {headline && <div className="li-headline">{headline}</div>}
-        {location && <div className="li-location">{location}</div>}
-        {connections && (
-          <div className="li-connections">{connections} connections</div>
-        )}
-        <a className="li-btn" href={url} target="_blank" rel="noopener noreferrer">
-          {icon}
-          Profilni ochish
-        </a>
-      </div>
-    </div>
-  );
-}
-
-export default function SocialFeeds({ profiles = [], posts = [] }) {
+export default function SocialFeeds({ profiles = [] }) {
   const profileByNetwork = {};
   for (const p of profiles) profileByNetwork[p.network] = p;
-  const others = NETWORKS.filter((n) => n.key !== "instagram");
 
   return (
     <section className="container social-feeds">
       <h2 className="social-feeds-title">Ijtimoiy tarmoqlarda kuzating</h2>
 
-      <InstagramCard
-        profile={profileByNetwork.instagram}
-        posts={posts.filter((p) => p.network === "instagram")}
-      />
-
-      <div className="social-feeds-grid social-feeds-grid--3">
-        {others.map((n) =>
-          n.key === "linkedin" ? (
-            <LinkedInCard key={n.key} profile={profileByNetwork[n.key]} />
-          ) : (
-            <ProfileCard
-              key={n.key}
-              network={n}
-              profile={profileByNetwork[n.key]}
-              posts={posts.filter((p) => p.network === n.key)}
-            />
-          )
-        )}
+      {/* To'rt tarmoq ham bir xil dizayn, bir xil o'lchamda, bitta qatorda. */}
+      <div className="social-feeds-grid">
+        {NETWORKS.map((n) => (
+          <ProfileCard
+            key={n.key}
+            network={n}
+            profile={profileByNetwork[n.key]}
+            posts={[]}
+          />
+        ))}
       </div>
     </section>
   );
