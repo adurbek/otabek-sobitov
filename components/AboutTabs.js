@@ -30,7 +30,7 @@ export default function AboutTabs({ about, awards, timeline = [] }) {
 
       {tab === "tarjima" && (
         <div className="subpanel active">
-          <div className="prose about-bio about-intro-block">
+          <div className="prose about-bio">
             {about?.photo_url && (
               <figure className="about-photo-float">
                 <img src={about.photo_url} alt={about?.full_name || "Portret"} />
@@ -45,8 +45,6 @@ export default function AboutTabs({ about, awards, timeline = [] }) {
               jamiyatini rivojlantirish yoʻnalishlarida samarali faoliyat yuritib
               kelmoqda.
             </p>
-          </div>
-          <div className="prose about-bio" style={{ maxWidth: 820 }}>
             <h3>Ta’lim</h3>
             <p>
               2024–2026 — Oʻzbekiston Milliy pedagogika universiteti, Psixologiya
@@ -56,8 +54,6 @@ export default function AboutTabs({ about, awards, timeline = [] }) {
               2020–2024 — Toshkent davlat pedagogika universiteti, Amaliy
               psixologiya yoʻnalishi boʻyicha bakalavr darajasi.
             </p>
-          </div>
-          <div className="prose about-bio" style={{ maxWidth: 820 }}>
             <h3>Ilmiy va jamoatchilik faoliyati</h3>
             <p>
               Otabek Sobitov yoshlar siyosati, siyosiy jarayonlar, huquqiy
