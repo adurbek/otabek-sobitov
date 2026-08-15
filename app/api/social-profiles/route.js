@@ -21,6 +21,7 @@ export async function PUT(request) {
     followers = "",
     following = "",
     bio = "",
+    location = "",
     profile_url = "",
     page_url = "",
   } = body || {};
@@ -29,8 +30,8 @@ export async function PUT(request) {
   }
   await db
     .prepare(
-      `INSERT INTO social_profiles (network, display_name, handle, avatar_url, followers, following, bio, profile_url, page_url)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `INSERT INTO social_profiles (network, display_name, handle, avatar_url, followers, following, bio, location, profile_url, page_url)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
        ON CONFLICT(network) DO UPDATE SET
          display_name=excluded.display_name,
          handle=excluded.handle,
@@ -38,10 +39,11 @@ export async function PUT(request) {
          followers=excluded.followers,
          following=excluded.following,
          bio=excluded.bio,
+         location=excluded.location,
          profile_url=excluded.profile_url,
          page_url=excluded.page_url`
     )
-    .run(network, display_name, handle, avatar_url, followers, following, bio, profile_url, page_url);
+    .run(network, display_name, handle, avatar_url, followers, following, bio, location, profile_url, page_url);
   const updated = await db
     .prepare("SELECT * FROM social_profiles WHERE network = ?")
     .get(network);

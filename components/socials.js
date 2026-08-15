@@ -39,7 +39,7 @@ export const SOCIALS = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/otabek-sobitov-136192369/",
+    href: "https://www.linkedin.com/in/otabek-sobitov-88257338b?originalSubdomain=uz",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor">
         <path d="M6.94 8.5H3.6V21h3.34V8.5ZM5.27 3a1.94 1.94 0 1 0 0 3.88 1.94 1.94 0 0 0 0-3.88ZM20.4 13.7c0-3.36-1.8-4.93-4.2-4.93-1.93 0-2.8 1.06-3.28 1.8V8.5H9.58V21h3.34v-6.98c0-.37.03-.74.14-1 .3-.73.96-1.5 2.09-1.5 1.47 0 2.06 1.12 2.06 2.77V21h3.34v-7.3Z" />

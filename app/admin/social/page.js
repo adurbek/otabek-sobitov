@@ -28,7 +28,7 @@ export default function AdminSocialPage() {
       const map = {};
       for (const p of profileList) map[p.network] = p;
       for (const n of NETWORKS) {
-        if (!map[n.key]) map[n.key] = { network: n.key, display_name: "", handle: "", avatar_url: "", followers: "", following: "", bio: "", profile_url: "", page_url: "" };
+        if (!map[n.key]) map[n.key] = { network: n.key, display_name: "", handle: "", avatar_url: "", followers: "", following: "", bio: "", location: "", profile_url: "", page_url: "" };
       }
       setProfiles(map);
       setPosts(postList);
@@ -128,13 +128,41 @@ export default function AdminSocialPage() {
             />
           </div>
           <div className="field">
-            <label>Obunachilar / followers (ixtiyoriy)</label>
+            <label>
+              {n.key === "linkedin"
+                ? "Connections (aloqalar soni) — masalan: 30"
+                : "Obunachilar / followers (ixtiyoriy)"}
+            </label>
             <input
               value={profiles[n.key].followers || ""}
               onChange={(e) => updateProfile(n.key, "followers", e.target.value)}
-              placeholder="masalan: 305"
+              placeholder={n.key === "linkedin" ? "masalan: 30" : "masalan: 305"}
             />
           </div>
+          {n.key === "linkedin" && (
+            <>
+              <div className="field">
+                <label>Headline / lavozim — LinkedIn</label>
+                <textarea
+                  value={profiles[n.key].bio || ""}
+                  onChange={(e) => updateProfile(n.key, "bio", e.target.value)}
+                  placeholder={"Frontend developer | Nocoder\nBeshariq IT Center"}
+                  rows={2}
+                />
+                <div className="field-hint">
+                  Ism ostida chiqadi (kasb/lavozim). Har bir qatordan yangi satrda.
+                </div>
+              </div>
+              <div className="field">
+                <label>Joylashuv — LinkedIn</label>
+                <input
+                  value={profiles[n.key].location || ""}
+                  onChange={(e) => updateProfile(n.key, "location", e.target.value)}
+                  placeholder="Toshkent, O'zbekiston"
+                />
+              </div>
+            </>
+          )}
           {n.key === "instagram" && (
             <>
               <div className="field">

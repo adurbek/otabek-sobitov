@@ -263,6 +263,56 @@ function InstagramCard({ profile, posts }) {
   );
 }
 
+// LinkedIn kartasi — haqiqiy LinkedIn profil ko'rinishida: qora banner, avatar
+// bannerga tushib turadi, ism, headline (lavozim), joylashuv, connections va tugma.
+function LinkedInCard({ profile }) {
+  const name = profile?.display_name || "Otabek Sobitov";
+  const url = profile?.profile_url || "https://www.linkedin.com/";
+  const headline = profile?.bio || "";
+  const location = profile?.location || "";
+  const connections = profile?.followers || "";
+  const icon = ICONS.linkedin;
+
+  return (
+    <div className="li-card">
+      <div className="li-cover">
+        <span className="li-cover-watermark" aria-hidden="true">
+          {icon}
+        </span>
+      </div>
+      <div className="li-body">
+        <a
+          className="li-avatar-wrap"
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {profile?.avatar_url ? (
+            <img className="li-avatar" src={profile.avatar_url} alt={name} />
+          ) : (
+            <span className="li-avatar li-avatar-fallback">{icon}</span>
+          )}
+        </a>
+        <div className="li-name">
+          <span className="li-name-text">{name}</span>
+          <span className="li-verified" aria-hidden="true">
+            {VERIFIED}
+          </span>
+        </div>
+        {headline && <div className="li-headline">{headline}</div>}
+        {location && <div className="li-location">{location}</div>}
+        {connections && (
+          <div className="li-connections">{connections} connections</div>
+        )}
+        <a className="li-btn" href={url} target="_blank" rel="noopener noreferrer">
+          {icon}
+          Profilni ochish
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export default function SocialFeeds({ profiles = [], posts = [] }) {
   const profileByNetwork = {};
   for (const p of profiles) profileByNetwork[p.network] = p;
@@ -278,14 +328,18 @@ export default function SocialFeeds({ profiles = [], posts = [] }) {
       />
 
       <div className="social-feeds-grid social-feeds-grid--3">
-        {others.map((n) => (
-          <ProfileCard
-            key={n.key}
-            network={n}
-            profile={profileByNetwork[n.key]}
-            posts={posts.filter((p) => p.network === n.key)}
-          />
-        ))}
+        {others.map((n) =>
+          n.key === "linkedin" ? (
+            <LinkedInCard key={n.key} profile={profileByNetwork[n.key]} />
+          ) : (
+            <ProfileCard
+              key={n.key}
+              network={n}
+              profile={profileByNetwork[n.key]}
+              posts={posts.filter((p) => p.network === n.key)}
+            />
+          )
+        )}
       </div>
     </section>
   );

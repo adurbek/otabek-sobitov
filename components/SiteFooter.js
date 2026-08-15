@@ -50,7 +50,7 @@ export default function SiteFooter() {
             </li>
             <li>
               <a
-                href="https://www.linkedin.com/in/otabek-sobitov-136192369/"
+                href="https://www.linkedin.com/in/otabek-sobitov-88257338b?originalSubdomain=uz"
                 target="_blank"
                 rel="noopener noreferrer"
               >
