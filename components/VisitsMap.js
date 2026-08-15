@@ -8,8 +8,8 @@ const EMPTY_FILL = "#dfe6f6";
 const UZ_HOME_FILL = "#3ecf1e";
 const LIGHT = [169, 190, 235]; // 1 marta — och ko‘k
 const DARK = [45, 74, 158]; // eng ko‘p — to‘q ko‘k
-// Hududlar xaritasi tashriflar soniga qarab emas, bir xil ko‘k rangda bo‘yaladi.
-const REGION_FILL = "#2d4a9e";
+// Hududlar xaritasi tashriflar soniga qarab emas, bir xil to‘q ko‘k (navy) rangda bo‘yaladi.
+const REGION_FILL = "#0B2A4A";
 
 function scaleColor(visits, max) {
   const t = max > 1 ? (visits - 1) / (max - 1) : 1;
