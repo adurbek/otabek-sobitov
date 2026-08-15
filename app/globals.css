@@ -260,12 +260,14 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 .soc-cover-net svg{width:24px;height:24px;fill:currentColor;}
 .soc-cover-watermark{position:absolute;right:10px;bottom:-22px;width:112px;height:112px;opacity:.18;color:#fff;pointer-events:none;}
 .soc-cover-watermark svg{width:100%;height:100%;fill:currentColor;}
-.soc-body{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 26px 34px;}
+.soc-body{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:60px 26px 34px;}
 /* Jonli lenta (Facebook Page Plugin) karta ichida — president.uz uslubi */
 .soc-embed{width:100%;background:#fff;overflow:hidden;}
 .soc-embed iframe{width:100%;height:520px;border:none;display:block;}
 .soc-body--live{padding-top:16px;}
-.soc-avatar{width:104px;height:104px;border-radius:50%;object-fit:cover;border:5px solid #fff;background:#fff;margin-top:-52px;box-shadow:0 3px 12px rgba(0,0,0,.16);}
+/* Rasm chiziqning pastki chetiga avtomatik markazlanadi: o'lchamni yoki chiziq
+   balandligini o'zgartirsangiz ham doim to'g'ri joyda turadi (yarmi chiziqda). */
+.soc-avatar{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);z-index:2;width:112px;height:112px;border-radius:50%;object-fit:cover;border:5px solid #fff;background:#fff;box-shadow:0 3px 12px rgba(0,0,0,.16);}
 .soc-avatar-fallback{display:flex;align-items:center;justify-content:center;color:#fff;background:var(--brand);}
 .soc-card.brand-instagram .soc-avatar-fallback{background:linear-gradient(45deg,#fa7e1e,#d62976,#962fbf);}
 .soc-avatar-fallback svg{width:48px;height:48px;fill:currentColor;}
@@ -351,7 +353,8 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
   .ig-card{max-width:100%;}
   /* Umumiy kartalar (Facebook/Telegram/LinkedIn) — kattaroq */
   .soc-cover{height:120px;}
-  .soc-avatar{width:120px;height:120px;margin-top:-60px;}
+  .soc-body{padding-top:66px;}
+  .soc-avatar{width:124px;height:124px;}
   .soc-name{font-size:22px;}
   .soc-handle{font-size:16px;}
   .soc-followers{font-size:17px;}
