@@ -103,6 +103,8 @@ export default function VisitsMap({ visits }) {
       name: shape.name,
       count: count || 0,
       home: tab === "world" && shape.id === "UZ",
+      // Hududlar xaritasida barcha viloyatlar "tashrif buyurilgan" deb ko‘rsatiladi.
+      region: tab === "region",
     });
   }
 
@@ -160,6 +162,7 @@ export default function VisitsMap({ visits }) {
             onHover={handleHover}
             onLeave={() => setTip(null)}
             zoom={zoom}
+            solidFill={REGION_FILL}
           />
         )}
 
@@ -186,6 +189,8 @@ export default function VisitsMap({ visits }) {
             <b>{tip.name}</b>
             {tip.home ? (
               <span>Vatanimiz</span>
+            ) : tip.region ? (
+              <span>Tashrif buyurilgan</span>
             ) : tip.count > 0 ? (
               <span>
                 {tip.count} marta tashrif buyurgan
