@@ -38,7 +38,55 @@ const VERIFIED = (
   </svg>
 );
 
-function ProfileCard({ network, profile }) {
+const PLAY = (
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M8 5v14l11-7L8 5Z" />
+  </svg>
+);
+
+// Havola video (reel / video) ekanini taxminlaydi — shunda thumbnail ustida
+// "play" belgisi chiqadi (Instagram/Facebook reels ko'rinishidek).
+function isVideoLink(url = "") {
+  return /reel|\/tv\/|\/video|youtu|\.mp4/i.test(url);
+}
+
+function PostTile({ post, icon }) {
+  const video = isVideoLink(post.link_url);
+  const inner = post.image_url ? (
+    <>
+      <img src={post.image_url} alt={post.body || ""} loading="lazy" />
+      {video && (
+        <span className="soc-thumb-play" aria-hidden="true">
+          {PLAY}
+        </span>
+      )}
+    </>
+  ) : (
+    <span className="soc-thumb-text">
+      <span className="soc-thumb-brand" aria-hidden="true">
+        {icon}
+      </span>
+      <span className="soc-thumb-body">{post.body}</span>
+    </span>
+  );
+
+  return post.link_url ? (
+    <a
+      className={`soc-thumb${post.image_url ? "" : " soc-thumb--text"}`}
+      href={post.link_url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {inner}
+    </a>
+  ) : (
+    <div className={`soc-thumb${post.image_url ? "" : " soc-thumb--text"}`}>
+      {inner}
+    </div>
+  );
+}
+
+function ProfileCard({ network, profile, posts }) {
   const url = profile?.profile_url || "";
   // Facebook uchun Sahifa (Page) havolasi kiritilgan bo'lsa, undan foydalanamiz.
   const href =
@@ -47,6 +95,8 @@ function ProfileCard({ network, profile }) {
   const handle = profile?.handle || "";
   const followers = profile?.followers || "";
   const icon = ICONS[network.key];
+  // Profil to'rida eng ko'pi 6 ta post ko'rsatiladi (2 qator).
+  const gridPosts = posts.slice(0, 6);
 
   return (
     <div className={`soc-card brand-${network.key}`}>
@@ -73,6 +123,15 @@ function ProfileCard({ network, profile }) {
         </span>
         {handle && <span className="soc-handle">{handle}</span>}
         {followers && <span className="soc-followers">{followers}</span>}
+
+        {gridPosts.length > 0 && (
+          <div className="soc-grid">
+            {gridPosts.map((p) => (
+              <PostTile key={p.id} post={p} icon={icon} />
+            ))}
+          </div>
+        )}
+
         <a
           className="soc-btn"
           href={href}
@@ -87,7 +146,7 @@ function ProfileCard({ network, profile }) {
   );
 }
 
-export default function SocialFeeds({ profiles = [] }) {
+export default function SocialFeeds({ profiles = [], posts = [] }) {
   const profileByNetwork = {};
   for (const p of profiles) profileByNetwork[p.network] = p;
 
@@ -100,6 +159,7 @@ export default function SocialFeeds({ profiles = [] }) {
             key={n.key}
             network={n}
             profile={profileByNetwork[n.key]}
+            posts={posts.filter((p) => p.network === n.key)}
           />
         ))}
       </div>

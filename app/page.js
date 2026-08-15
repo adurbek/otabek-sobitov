@@ -36,6 +36,11 @@ export default async function HomePage() {
     .prepare("SELECT scope, code, visits FROM map_visits")
     .all();
   const socialProfiles = await db.prepare("SELECT * FROM social_profiles").all();
+  const socialPosts = await db
+    .prepare(
+      "SELECT * FROM social_posts ORDER BY sort_order ASC, date DESC, id DESC"
+    )
+    .all();
 
   return (
     <>
@@ -104,7 +109,7 @@ export default async function HomePage() {
 
       <VisitsMap visits={mapVisits} />
 
-      <SocialFeeds profiles={socialProfiles} />
+      <SocialFeeds profiles={socialProfiles} posts={socialPosts} />
 
       <SiteFooter />
     </>
