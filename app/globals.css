@@ -294,16 +294,16 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 /* ===== INSTAGRAM uslubidagi karta (qorong'i profil ko'rinishi) ===== */
 .ig-card{display:flex;flex-direction:column;background:#000;color:#fff;border:1px solid #262626;border-radius:18px;overflow:hidden;padding:18px 16px 16px;box-shadow:0 2px 10px rgba(11,42,74,.06);transition:transform .2s,box-shadow .2s;}
 .ig-card:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(0,0,0,.25);}
-.ig-head{display:flex;align-items:center;gap:14px;}
-.ig-avatar-ring{flex-shrink:0;width:74px;height:74px;border-radius:50%;padding:3px;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);display:block;}
+.ig-head{display:flex;align-items:center;gap:16px;}
+.ig-avatar-ring{flex-shrink:0;width:88px;height:88px;border-radius:50%;padding:3px;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);display:block;}
 .ig-avatar{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #000;background:#000;display:block;}
 .ig-avatar-fallback{display:flex;align-items:center;justify-content:center;color:#fff;background:#000;}
-.ig-avatar-fallback svg{width:32px;height:32px;fill:currentColor;}
+.ig-avatar-fallback svg{width:38px;height:38px;fill:currentColor;}
 .ig-stats{flex:1;display:flex;justify-content:space-around;text-align:center;}
-.ig-stat{display:flex;flex-direction:column;gap:1px;}
-.ig-stat b{font-size:17px;font-weight:700;color:#fff;line-height:1.2;}
-.ig-stat span{font-size:12.5px;color:#b3b3b3;}
-.ig-name{display:flex;align-items:center;gap:5px;margin-top:14px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15.5px;color:#fff;}
+.ig-stat{display:flex;flex-direction:column;gap:2px;}
+.ig-stat b{font-size:22px;font-weight:700;color:#fff;line-height:1.15;}
+.ig-stat span{font-size:14px;color:#b3b3b3;}
+.ig-name{display:flex;align-items:center;gap:5px;margin-top:16px;font-family:'Manrope',sans-serif;font-weight:700;font-size:17px;color:#fff;}
 .ig-verified{width:15px;height:15px;color:#3897f0;flex-shrink:0;}
 .ig-verified svg{width:100%;height:100%;display:block;fill:currentColor;}
 .ig-handle{font-size:13px;color:#b3b3b3;margin-top:2px;word-break:break-word;}
@@ -316,7 +316,28 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 .ig-grid .soc-thumb--text{background:linear-gradient(45deg,#fa7e1e,#d62976,#962fbf);}
 
 @media(max-width:1100px){ .social-feeds-grid{grid-template-columns:1fr 1fr;gap:22px;max-width:760px;margin:0 auto;} }
-@media(max-width:560px){ .social-feeds-grid{grid-template-columns:1fr;gap:18px;max-width:380px;} .social-feeds{padding:44px 18px 60px;} }
+@media(max-width:560px){
+  /* Telefonda kartalar to'liq kenglikda va katta bo'ladi */
+  .social-feeds-grid{grid-template-columns:1fr;gap:22px;max-width:100%;}
+  .social-feeds{padding:44px 16px 60px;}
+  /* Umumiy kartalar (Facebook/Telegram/LinkedIn) — kattaroq */
+  .soc-cover{height:120px;}
+  .soc-avatar{width:120px;height:120px;margin-top:-60px;}
+  .soc-name{font-size:22px;}
+  .soc-handle{font-size:16px;}
+  .soc-followers{font-size:17px;}
+  .soc-btn{font-size:16px;padding:15px 18px;}
+  .soc-embed iframe{height:600px;}
+  /* Instagram kartasi — telefonda katta */
+  .ig-card{padding:22px 20px 20px;}
+  .ig-avatar-ring{width:112px;height:112px;}
+  .ig-stat b{font-size:26px;}
+  .ig-stat span{font-size:16px;}
+  .ig-name{font-size:20px;margin-top:20px;}
+  .ig-handle{font-size:15px;}
+  .ig-bio{font-size:15px;}
+  .ig-btn{font-size:16px;padding:13px 16px;}
+}
 
 /* ===== NEWS DETAIL (article) ===== */
 .article-wrap{background:var(--bg-alt);padding:36px 20px 70px;}
