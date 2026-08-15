@@ -88,15 +88,54 @@ function PostTile({ post, icon }) {
 
 function ProfileCard({ network, profile, posts }) {
   const url = profile?.profile_url || "";
-  // Facebook uchun Sahifa (Page) havolasi kiritilgan bo'lsa, undan foydalanamiz.
-  const href =
-    (network.key === "facebook" && profile?.page_url) || url || "#";
+  // Facebook Sahifa (Page) havolasi kiritilgan bo'lsa — rasmiy Facebook Page
+  // Plugin orqali jonli lenta ko'rsatiladi (president.uz kabi): postlar avtomatik,
+  // obunachilar soni va "Follow" tugmasi plaginning o'zida chiqadi.
+  const pageUrl = network.key === "facebook" ? profile?.page_url : "";
+  const href = pageUrl || url || "#";
   const name = profile?.display_name || "Otabek Sobitov";
   const handle = profile?.handle || "";
   const followers = profile?.followers || "";
   const icon = ICONS[network.key];
   // Profil to'rida eng ko'pi 6 ta post ko'rsatiladi (2 qator).
   const gridPosts = posts.slice(0, 6);
+
+  if (pageUrl) {
+    return (
+      <div className={`soc-card brand-${network.key} soc-card--live`}>
+        <div className="soc-cover">
+          <span className="soc-cover-net">
+            {icon}
+            {network.title}
+          </span>
+          <span className="soc-cover-watermark" aria-hidden="true">
+            {icon}
+          </span>
+        </div>
+        <div className="soc-embed">
+          <iframe
+            src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
+              pageUrl
+            )}&tabs=timeline&width=380&height=520&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`}
+            title={`${name} — Facebook`}
+            loading="lazy"
+            allow="encrypted-media"
+          />
+        </div>
+        <div className="soc-body soc-body--live">
+          <a
+            className="soc-btn"
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {icon}
+            {network.btnLabel}
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`soc-card brand-${network.key}`}>
