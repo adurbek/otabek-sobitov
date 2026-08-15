@@ -2,6 +2,7 @@ import "./globals.css";
 import LanguageInit from "@/components/LanguageInit";
 import BugReporter from "@/components/BugReporter";
 import ScrollReveal from "@/components/ScrollReveal";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata = {
   title: "Otabek Sobitov rasmiy sahifasi",
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <LanguageInit />
+        <SmoothScroll />
         <ScrollReveal />
         {children}
         <BugReporter />
