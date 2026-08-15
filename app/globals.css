@@ -254,7 +254,7 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 .soc-card.brand-telegram{--brand:#229ed9;}
 .soc-card.brand-linkedin{--brand:#0a66c2;}
 .soc-card.brand-instagram{--brand:#d62976;}
-.soc-cover{height:104px;background:var(--brand);display:flex;align-items:center;gap:10px;padding:0 24px;color:#fff;position:relative;overflow:hidden;}
+.soc-cover{height:104px;background:var(--brand);display:flex;align-items:flex-start;gap:10px;padding:20px 24px 0;color:#fff;position:relative;overflow:hidden;}
 .soc-card.brand-instagram .soc-cover{background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);}
 .soc-cover-net{display:inline-flex;align-items:center;gap:9px;font-family:'Manrope',sans-serif;font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase;z-index:1;}
 .soc-cover-net svg{width:24px;height:24px;fill:currentColor;}
