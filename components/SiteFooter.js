@@ -64,7 +64,7 @@ export default function SiteFooter() {
         <span>© 2026 OTABEK SOBITOV. Barcha huquqlar himoyalangan.</span>
         <span className="copy-madeby">
           <a
-            href="https://t.me/abdurakhmonov_add"
+            href="https://t.me/abdurahmonov_add"
             target="_blank"
             rel="noopener noreferrer"
           >
