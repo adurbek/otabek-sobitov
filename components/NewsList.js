@@ -6,7 +6,6 @@ import Link from "next/link";
 const TABS = [
   { key: "barchasi", label: "Barchasi", tag: null },
   { key: "chiqish", label: "Chiqishlar", tag: "Chiqish" },
-  { key: "matbuot", label: "Matbuot e’lonlari", tag: "Matbuot e’lon" },
 ];
 
 export default function NewsList({ news }) {
