@@ -112,8 +112,8 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 .about-photo{background:var(--bg-alt);border:1px solid var(--line);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;text-align:center;}
 .about-bio{max-width:940px;}
 .about-bio::after{content:"";display:block;clear:both;}
-.about-bio p{text-align:justify;}
-.about-photo-float{float:right;width:290px;margin:4px 0 20px 32px;border:1px solid var(--line);overflow:hidden;}
+.about-bio p{text-align:justify;margin-bottom:18px;}
+.about-photo-float{float:right;width:290px;margin:4px 0 24px 44px;border:1px solid var(--line);overflow:hidden;}
 .about-photo-float img{width:100%;display:block;}
 .about-bio .about-link-btn{clear:both;}
 .prose h3{font-size:19px;margin:28px 0 12px;}
@@ -424,10 +424,11 @@ footer .copy{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-
   .prose h3{margin:22px 0 10px;font-size:18px;}
 }
 @media(max-width:480px){
-  /* Juda kichik telefonlar: rasm biroz kichikroq, matn zichroq */
-  .about-photo-float{max-width:240px;margin-bottom:18px;}
+  /* Juda kichik telefonlar: rasm biroz kichikroq, matn qulay bo'shliqda */
+  .about-photo-float{max-width:240px;margin-bottom:20px;}
   .subtabs button{padding:11px 13px;letter-spacing:.02em;}
-  .prose p{font-size:14.5px;line-height:1.8;}
+  .prose p{font-size:14.5px;line-height:1.85;margin-bottom:16px;}
+  .prose h3{margin:20px 0 10px;}
 }
 
 /* ===== ADMIN PANEL ===== */
