@@ -195,7 +195,8 @@ function InstagramCard({ profile, posts }) {
   const following = profile?.following || "0";
   const bio = profile?.bio || "";
   const icon = ICONS.instagram;
-  const postsCount = posts.length;
+  // Post soni: admin qo'lda kiritsa o'sha, aks holda qo'shilgan postlar soni.
+  const postsCount = profile?.posts_count || String(posts.length);
   const gridPosts = posts.slice(0, 9);
 
   return (

@@ -28,7 +28,7 @@ export default function AdminSocialPage() {
       const map = {};
       for (const p of profileList) map[p.network] = p;
       for (const n of NETWORKS) {
-        if (!map[n.key]) map[n.key] = { network: n.key, display_name: "", handle: "", avatar_url: "", followers: "", following: "", bio: "", location: "", profile_url: "", page_url: "" };
+        if (!map[n.key]) map[n.key] = { network: n.key, display_name: "", handle: "", avatar_url: "", followers: "", following: "", bio: "", location: "", posts_count: "", profile_url: "", page_url: "" };
       }
       setProfiles(map);
       setPosts(postList);
@@ -165,6 +165,18 @@ export default function AdminSocialPage() {
           )}
           {n.key === "instagram" && (
             <>
+              <div className="field">
+                <label>Post soni — Instagram</label>
+                <input
+                  value={profiles[n.key].posts_count || ""}
+                  onChange={(e) => updateProfile(n.key, "posts_count", e.target.value)}
+                  placeholder="masalan: 45"
+                />
+                <div className="field-hint">
+                  Bo&rsquo;sh qoldirilsa, quyida qo&rsquo;shilgan Instagram
+                  postlari soni ko&rsquo;rsatiladi.
+                </div>
+              </div>
               <div className="field">
                 <label>Following (kuzatilayotganlar soni) — Instagram</label>
                 <input
