@@ -122,8 +122,8 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 .prose ol{margin:8px 0 20px 20px;}
 .prose ol li{font-size:15px;line-height:1.8;color:#37415a;padding:4px 0;}
 
-.awards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;}
-.award-card{border:1px solid var(--line);padding:24px;background:var(--bg-alt);}
+.awards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;}
+.award-card{border:1px solid var(--line);padding:16px;background:var(--bg-alt);}
 .award-card .yr{font-size:12px;font-weight:700;color:var(--navy-3);letter-spacing:.06em;}
 .award-card h4{font-size:16px;margin:8px 0 6px;color:var(--ink);font-family:'Manrope',sans-serif;font-weight:700;}
 .award-card p{font-size:13.5px;color:var(--muted);line-height:1.6;}
@@ -549,7 +549,8 @@ footer .copy{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-
 .about-photo.has-img img{width:100%;height:100%;object-fit:cover;display:block;}
 .about-link-btn{display:inline-block;margin-top:16px;background:var(--navy-3);color:#fff;font-size:13px;font-weight:700;padding:11px 20px;border-radius:4px;}
 .about-link-btn:hover{background:var(--navy);}
-.award-img{margin:0 auto 16px;max-width:230px;overflow:hidden;background:#e9edf5;border-radius:8px;}
+/* Rasm kartaga to'liq moslanadi (yuqorida, karta kengligida) */
+.award-img{margin:-16px -16px 14px;overflow:hidden;background:#e9edf5;}
 .award-img img{width:100%;height:auto;object-fit:contain;display:block;}
 .award-link{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--navy-3);}
 .award-link:hover{color:var(--navy);}
