@@ -246,36 +246,36 @@ nav.main-nav a.active,nav.main-nav a:hover{color:var(--navy-3);}
 
 /* ===== SOCIAL PROFILE CARDS (Instagram / Facebook / Telegram / LinkedIn) ===== */
 .social-feeds{padding:52px 32px 80px;}
-.social-feeds-title{font-size:24px;color:var(--navy);text-align:center;margin-bottom:34px;font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:.01em;}
-.social-feeds-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;align-items:stretch;}
-.soc-card{--brand:#1877f2;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(11,42,74,.06);transition:transform .2s,box-shadow .2s;}
-.soc-card:hover{transform:translateY(-5px);box-shadow:0 14px 30px rgba(11,42,74,.14);}
+.social-feeds-title{font-size:28px;color:var(--navy);text-align:center;margin-bottom:40px;font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:.01em;}
+.social-feeds-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px;align-items:stretch;}
+.soc-card{--brand:#1877f2;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 2px 10px rgba(11,42,74,.06);transition:transform .2s,box-shadow .2s;}
+.soc-card:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(11,42,74,.15);}
 .soc-card.brand-facebook{--brand:#1877f2;}
 .soc-card.brand-telegram{--brand:#229ed9;}
 .soc-card.brand-linkedin{--brand:#0a66c2;}
 .soc-card.brand-instagram{--brand:#d62976;}
-.soc-cover{height:78px;background:var(--brand);display:flex;align-items:center;gap:8px;padding:0 18px;color:#fff;position:relative;overflow:hidden;}
+.soc-cover{height:104px;background:var(--brand);display:flex;align-items:center;gap:10px;padding:0 24px;color:#fff;position:relative;overflow:hidden;}
 .soc-card.brand-instagram .soc-cover{background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);}
-.soc-cover-net{display:inline-flex;align-items:center;gap:8px;font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;z-index:1;}
-.soc-cover-net svg{width:20px;height:20px;fill:currentColor;}
-.soc-cover-watermark{position:absolute;right:8px;bottom:-18px;width:86px;height:86px;opacity:.18;color:#fff;pointer-events:none;}
+.soc-cover-net{display:inline-flex;align-items:center;gap:9px;font-family:'Manrope',sans-serif;font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase;z-index:1;}
+.soc-cover-net svg{width:24px;height:24px;fill:currentColor;}
+.soc-cover-watermark{position:absolute;right:10px;bottom:-22px;width:112px;height:112px;opacity:.18;color:#fff;pointer-events:none;}
 .soc-cover-watermark svg{width:100%;height:100%;fill:currentColor;}
-.soc-body{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 18px 22px;}
-.soc-avatar{width:78px;height:78px;border-radius:50%;object-fit:cover;border:4px solid #fff;background:#fff;margin-top:-39px;box-shadow:0 2px 10px rgba(0,0,0,.14);}
+.soc-body{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 22px 28px;}
+.soc-avatar{width:104px;height:104px;border-radius:50%;object-fit:cover;border:5px solid #fff;background:#fff;margin-top:-52px;box-shadow:0 3px 12px rgba(0,0,0,.16);}
 .soc-avatar-fallback{display:flex;align-items:center;justify-content:center;color:#fff;background:var(--brand);}
 .soc-card.brand-instagram .soc-avatar-fallback{background:linear-gradient(45deg,#fa7e1e,#d62976,#962fbf);}
-.soc-avatar-fallback svg{width:36px;height:36px;fill:currentColor;}
-.soc-name{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:13px;font-family:'Manrope',sans-serif;font-weight:700;font-size:16px;color:var(--navy);line-height:1.2;}
-.soc-verified{width:15px;height:15px;color:var(--brand);flex-shrink:0;}
+.soc-avatar-fallback svg{width:48px;height:48px;fill:currentColor;}
+.soc-name{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:16px;font-family:'Manrope',sans-serif;font-weight:700;font-size:19px;color:var(--navy);line-height:1.2;}
+.soc-verified{width:18px;height:18px;color:var(--brand);flex-shrink:0;}
 .soc-verified svg{width:100%;height:100%;display:block;fill:currentColor;}
-.soc-handle{font-size:13px;color:var(--muted);margin-top:4px;word-break:break-word;}
-.soc-followers{font-size:13.5px;color:var(--navy-3);font-weight:600;margin-top:12px;}
-.soc-btn{margin-top:auto;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--brand);color:#fff;font-size:13.5px;font-weight:700;padding:11px 14px;border-radius:10px;line-height:1;margin-top:18px;transition:filter .15s;}
+.soc-handle{font-size:14.5px;color:var(--muted);margin-top:5px;word-break:break-word;}
+.soc-followers{font-size:15px;color:var(--navy-3);font-weight:600;margin-top:14px;}
+.soc-btn{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--brand);color:#fff;font-size:15px;font-weight:700;padding:13px 16px;border-radius:11px;line-height:1;margin-top:22px;transition:filter .15s;}
 .soc-card.brand-instagram .soc-btn{background:linear-gradient(45deg,#fa7e1e,#d62976,#962fbf);}
 .soc-btn:hover{filter:brightness(1.08);color:#fff;}
-.soc-btn svg{width:16px;height:16px;fill:currentColor;}
-@media(max-width:1100px){ .social-feeds-grid{grid-template-columns:1fr 1fr;} }
-@media(max-width:560px){ .social-feeds-grid{grid-template-columns:1fr 1fr;gap:14px;} .social-feeds{padding:44px 18px 60px;} .soc-cover{height:64px;padding:0 12px;} .soc-cover-net{font-size:12px;} .soc-name{font-size:14px;} .soc-btn{font-size:12px;padding:9px 8px;} }
+.soc-btn svg{width:18px;height:18px;fill:currentColor;}
+@media(max-width:1100px){ .social-feeds-grid{grid-template-columns:1fr 1fr;gap:22px;max-width:760px;margin:0 auto;} }
+@media(max-width:560px){ .social-feeds-grid{grid-template-columns:1fr;gap:18px;max-width:380px;} .social-feeds{padding:44px 18px 60px;} }
 
 /* ===== NEWS DETAIL (article) ===== */
 .article-wrap{background:var(--bg-alt);padding:36px 20px 70px;}
